@@ -1,4 +1,5 @@
 import ClientComp from "./PYQResourcesPage.jsx";
+import { getDynamicResources, getAllPdfs } from '@/utils/pdf';
 
 const SITE_URL = 'https://question.maarula.in';
 
@@ -28,6 +29,10 @@ export default async function Page({ params, searchParams }) {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
 
+  // Dynamically build the resource data from the /data/pyqPdf folder
+  const dynamicResources = await getDynamicResources();
+  const localPdfs = await getAllPdfs();
+
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -40,7 +45,12 @@ export default async function Page({ params, searchParams }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-      <ClientComp params={resolvedParams} searchParams={resolvedSearchParams} />
+      <ClientComp 
+        params={resolvedParams} 
+        searchParams={resolvedSearchParams} 
+        localPdfs={localPdfs} 
+        dynamicResources={dynamicResources}
+      />
     </>
   );
 }
