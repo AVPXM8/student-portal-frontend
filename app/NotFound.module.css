@@ -33,6 +33,7 @@
   margin-bottom: 20px;
   background: linear-gradient(135deg, #FF5E0E, #FFB800);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   position: relative;
   animation: pulse 2s ease-in-out infinite;
