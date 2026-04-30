@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         
-        <Script id="mathjax-config" strategy="lazyOnload">
+        <Script id="mathjax-config" strategy="beforeInteractive">
           {`
             window.MathJax = {
               tex: {
@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
         </Script>
         <Script 
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
         {/* Google Analytics */}
         <Script

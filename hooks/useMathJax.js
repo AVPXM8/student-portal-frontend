@@ -11,19 +11,20 @@ const useMathJax = (dependencies, containerRef) => {
     const typeset = () => {
       if (typeof window?.MathJax?.typesetPromise === 'function') {
         const elements = containerRef && containerRef.current ? [containerRef.current] : undefined;
-        // Do not clear the typeset cache globally if we are only typesetting specific elements
-        if (!elements) {
-          window.MathJax.typesetClear?.();
+        
+        // Clear if we have new content to avoid double typesetting issues
+        if (elements && window.MathJax.typesetClear) {
+          try { window.MathJax.typesetClear(elements); } catch(e) {}
         }
         
-        // Use MathJax typesetting queue to prevent concurrent typeset errors
-        let promise = window.MathJax.startup?.promise || Promise.resolve();
-        promise = promise.then(() => window.MathJax.typesetPromise(elements))
-                         .catch((err) => console.log('MathJax typeset failed: ', err));
-                         
-        if (window.MathJax.startup) {
-          window.MathJax.startup.promise = promise;
-        }
+        // Ensure MathJax is ready before calling typesetPromise
+        const startupPromise = window.MathJax.startup?.promise || Promise.resolve();
+        
+        startupPromise.then(() => {
+          return window.MathJax.typesetPromise(elements);
+        }).catch((err) => {
+          console.log('MathJax typeset failed: ', err);
+        });
       } else {
         // MathJax not loaded yet — retry
         retryRef.current = setTimeout(typeset, 500);

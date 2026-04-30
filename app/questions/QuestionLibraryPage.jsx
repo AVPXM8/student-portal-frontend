@@ -280,6 +280,7 @@ const QuestionLibraryPage = ({ initialQuestions = [], initialTotalDocs = 0, init
   // Refs
   const questionListRef = useRef(null);
   const filterToggleBtnRef = useRef(null);
+  const isFirstMount = useRef(true);
 
   // URL → applied filters
   const currentAppliedFilters = useMemo(
@@ -370,6 +371,11 @@ const QuestionLibraryPage = ({ initialQuestions = [], initialTotalDocs = 0, init
 
   // Fetch questions on applied URL change
   useEffect(() => {
+    if (isFirstMount.current && initialQuestions.length > 0) {
+      isFirstMount.current = false;
+      return;
+    }
+
     setLoading(true);
     setError(null);
     const controller = new AbortController();

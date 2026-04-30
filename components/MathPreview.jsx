@@ -2,6 +2,7 @@
 
 import React from 'react';
 import useMathJax from '@/hooks/useMathJax';
+import { renderMathSSR } from '@/utils/renderMathSSR';
 
 const MathPreview = ({ latexString = '', className = '', style = {} }) => {
   // Guard: don’t let MathJax mutate during the very first paint
@@ -24,20 +25,23 @@ const MathPreview = ({ latexString = '', className = '', style = {} }) => {
     return strToClean
       .replace(/&nbsp;/g, ' ')
       .replace(/&amp;/g, '&')
-      .replace(/<br\s*\/?>/gi, '\n')
-      // Ensure LaTeX blocks have proper spacing
-      .replace(/(\$|\\\(|\\\[)/g, ' $1')
-      .replace(/(\$|\\\)|\\\])/g, '$1 ');
+      .replace(/<br\s*\/?>/gi, '\n');
   }, [latexString, isAlreadyKaTeX]);
 
-  useMathJax(mounted && !isAlreadyKaTeX ? [cleaned] : [], containerRef);
+  const htmlContent = React.useMemo(() => {
+    if (!cleaned) return '';
+    if (isAlreadyKaTeX) return cleaned;
+    return renderMathSSR(cleaned);
+  }, [cleaned, isAlreadyKaTeX]);
+
+  useMathJax(!isAlreadyKaTeX ? [cleaned] : [], containerRef);
 
   return (
     <div
       ref={containerRef}
       className={className}
       style={style}
-      dangerouslySetInnerHTML={{ __html: cleaned }}
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
     />
   );
 };
