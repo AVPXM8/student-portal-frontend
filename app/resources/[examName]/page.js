@@ -1,5 +1,4 @@
 import ClientComp from "../PYQResourcesPage.jsx";
-import { PYQ_DATA } from "@/data/resourceData";
 import { getDynamicResources, getAllPdfs } from '@/utils/pdf';
 
 const SITE_URL = 'https://question.maarula.in';
@@ -7,9 +6,10 @@ const SITE_URL = 'https://question.maarula.in';
 export async function generateMetadata({ params }) {
   const { examName } = await params;
   const decoded = decodeURIComponent(examName);
+  const dynamicResources = await getDynamicResources();
   
   // Robust case-insensitive lookup
-  const matchedKey = Object.keys(PYQ_DATA).find(key => {
+  const matchedKey = Object.keys(dynamicResources).find(key => {
     const k = key.toUpperCase();
     const d = decoded.toUpperCase();
     return k === d || 
@@ -18,11 +18,11 @@ export async function generateMetadata({ params }) {
            k.replace(/[- ]/g, '') === d.replace(/[- ]/g, '');
   });
   
-  const data = PYQ_DATA[matchedKey];
+  const data = dynamicResources[matchedKey];
   const displayTitle = matchedKey || decoded;
   const url = `${SITE_URL}/resources/${encodeURIComponent(displayTitle)}`;
 
-  if (!data) return { title: "Exam Not Found | Mathem Solvex" };
+  if (!data) return { title: `${displayTitle} Papers | Mathem Solvex` };
 
   const yearCount = data.yearwise?.length || 0;
   const topicCount = data.topicwise?.length || 0;

@@ -1,9 +1,10 @@
-import { PYQ_DATA } from "@/data/resourceData";
+import { getDynamicResources } from "@/utils/pdf";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
 const SITE_URL = 'https://question.maarula.in';
 
 export default async function sitemap() {
+  const dynamicResources = await getDynamicResources();
   // Static pages
   const staticRoutes = [
     { url: `${SITE_URL}`, lastModified: new Date(), changeFrequency: 'daily', priority: 1.0 },
@@ -52,24 +53,26 @@ export default async function sitemap() {
   }
 
   // Exam Resource pages (e.g., /resources/NIMCET)
-  const examRoutes = Object.keys(PYQ_DATA).map((exam) => ({
+  const examRoutes = Object.keys(dynamicResources).map((exam) => ({
     url: `${SITE_URL}/resources/${encodeURIComponent(exam)}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.8,
   }));
 
-  // Paper/exam/year pages (e.g., /paper/NIMCET/2024) — Fix H3
+  // Paper/exam/year pages (e.g., /paper/NIMCET/2024)
   const paperRoutes = [];
-  Object.entries(PYQ_DATA).forEach(([exam, data]) => {
+  Object.entries(dynamicResources).forEach(([exam, data]) => {
     if (data.yearwise?.length) {
       data.yearwise.forEach((paper) => {
-        paperRoutes.push({
-          url: `${SITE_URL}/paper/${encodeURIComponent(exam)}/${encodeURIComponent(paper.year)}`,
-          lastModified: new Date(),
-          changeFrequency: 'monthly',
-          priority: 0.6,
-        });
+        if (paper.year) {
+          paperRoutes.push({
+            url: `${SITE_URL}/paper/${encodeURIComponent(exam)}/${encodeURIComponent(paper.year)}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+          });
+        }
       });
     }
   });

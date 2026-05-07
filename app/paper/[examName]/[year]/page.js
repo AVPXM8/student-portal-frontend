@@ -1,5 +1,4 @@
 import ClientComp from "./FullPaperViewPage.jsx";
-import { PYQ_DATA } from "@/data/resourceData";
 
 const SITE_URL = 'https://question.maarula.in';
 
@@ -8,13 +7,7 @@ export async function generateMetadata({ params }) {
   const decodedExam = decodeURIComponent(examName);
   const decodedYear = decodeURIComponent(year);
 
-  const matchedKey = Object.keys(PYQ_DATA).find(key => {
-    const k = key.toUpperCase();
-    const d = decodedExam.toUpperCase();
-    return k === d || k.replace(/-/g, ' ') === d || k === d.replace(/-/g, ' ') || k.replace(/[- ]/g, '') === d.replace(/[- ]/g, '');
-  });
-
-  const displayExam = matchedKey || decodedExam;
+  const displayExam = decodedExam;
   const url = `${SITE_URL}/paper/${encodeURIComponent(displayExam)}/${decodedYear}`;
 
   return {

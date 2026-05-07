@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { PYQ_DATA } from '../data/resourceData';
 
 const PDF_DIRECTORY = path.join(process.cwd(), 'data', 'pyqPdf');
 
@@ -16,20 +15,10 @@ export function generateSlug(filename) {
 }
 
 /**
- * Categorizes and builds the entire PYQ_DATA object from local files and static data
+ * Categorizes and builds the resource data object entirely from local files
  */
 export async function getDynamicResources() {
-  const data = JSON.parse(JSON.stringify(PYQ_DATA)); // Deep copy static data
-
-  // Initialize slugs for static data if they don't exist
-  Object.keys(data).forEach(cat => {
-    ['yearwise', 'topicwise'].forEach(type => {
-      data[cat][type] = data[cat][type].map(item => ({
-        ...item,
-        slug: item.slug || generateSlug(item.title)
-      }));
-    });
-  });
+  const data = {};
 
   if (!fs.existsSync(PDF_DIRECTORY)) return data;
 
@@ -72,16 +61,16 @@ export async function getDynamicResources() {
 
     const targetList = isTopicWise ? data[category].topicwise : data[category].yearwise;
     
-    // Avoid duplicates by title or slug
-    const exists = targetList.find(i => i.title === name || i.slug === slug);
+    // Avoid duplicates by slug
+    const exists = targetList.find(i => i.slug === slug);
     if (!exists) {
       targetList.push(item);
-    } else {
-      // If it exists in static data, mark it as local so the viewer uses the local file
-      exists.isLocal = true;
-      exists.url = `/resources/viewer/${slug}`;
-      exists.slug = slug;
     }
+  });
+
+  // Sort by year descending for yearwise
+  Object.keys(data).forEach(cat => {
+    data[cat].yearwise.sort((a, b) => (b.year || 0) - (a.year || 0));
   });
 
   console.log('Final Resource Categories:', Object.keys(data));
@@ -89,47 +78,24 @@ export async function getDynamicResources() {
 }
 
 /**
- * Gets all PDF files (flat list from both local and static data)
+ * Gets all PDF files (flat list from local filesystem)
  */
 export async function getAllPdfs() {
   const allResources = [];
   
-  // 1. Add static data
-  Object.keys(PYQ_DATA).forEach(cat => {
-    ['yearwise', 'topicwise'].forEach(type => {
-      PYQ_DATA[cat][type].forEach(item => {
-        const slug = item.slug || generateSlug(item.title);
-        allResources.push({
-          name: item.title,
-          slug: slug,
-          url: item.url,
-          isLocal: false
-        });
-      });
-    });
-  });
-
-  // 2. Add local files (and override if local exists)
   if (fs.existsSync(PDF_DIRECTORY)) {
     const files = fs.readdirSync(PDF_DIRECTORY).filter(file => file.endsWith('.pdf'));
     files.forEach(file => {
       const name = file.replace(/\.[^/.]+$/, "");
       const slug = generateSlug(file);
       
-      const existing = allResources.find(r => r.slug === slug || r.name === name);
-      if (existing) {
-        existing.isLocal = true;
-        existing.fileName = file;
-        existing.url = `/api/pdf/${slug}`; // Internal API for local files
-      } else {
-        allResources.push({
-          name: name,
-          slug: slug,
-          fileName: file,
-          isLocal: true,
-          url: `/api/pdf/${slug}`
-        });
-      }
+      allResources.push({
+        name: name,
+        slug: slug,
+        fileName: file,
+        isLocal: true,
+        url: `/api/pdf/${slug}`
+      });
     });
   }
 
