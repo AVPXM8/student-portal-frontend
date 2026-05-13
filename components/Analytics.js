@@ -11,7 +11,11 @@ function AnalyticsContent() {
   useEffect(() => {
     if (pathname) {
       const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : "");
-      gtag.pageview(url);
+      // Small delay to ensure title is updated by Next.js metadata
+      const timer = setTimeout(() => {
+        gtag.pageview(url);
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [pathname, searchParams]);
 

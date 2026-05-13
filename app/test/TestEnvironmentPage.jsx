@@ -10,6 +10,7 @@ import api from "@/api";
 import MathPreview from '@/components/MathPreview';
 import useMathJax from '@/hooks/useMathJax';
 import styles from "./TestEnvironmentPage.module.css";
+import * as gtag from '@/lib/gtag';
 
 // Dynamically import ReactPlayer to prevent hydration issues
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
@@ -138,12 +139,30 @@ const TestEnvironmentPage = () => {
   const startTest = () => {
     setIsTestStarted(true);
     setStatus(prev => ({ ...prev, [0]: 'visited' }));
+    
+    // Track Test Start
+    gtag.event('test_start', {
+      exam_name: examName,
+      subject: subject,
+      topic: topic,
+      year: year,
+      total_questions: questions.length
+    });
   };
 
   const submitTest = useCallback(() => {
     setIsTestSubmitted(true);
     setIsSidebarOpen(false);
-  }, []);
+
+    // Track Test Submit
+    gtag.event('test_submit', {
+      exam_name: examName,
+      total_questions: questions.length,
+      score: results?.score || 0,
+      correct: results?.correct || 0,
+      incorrect: results?.incorrect || 0
+    });
+  }, [examName, questions.length, results]);
 
   const handleExit = () => {
     setShowExitConfirm(true);
@@ -172,6 +191,14 @@ const TestEnvironmentPage = () => {
     if (status[index] === 'unvisited') {
       setStatus(prev => ({ ...prev, [index]: 'visited' }));
     }
+    
+    // Track Question View
+    gtag.event('test_question_view', {
+      exam_name: examName,
+      question_index: index + 1,
+      total_questions: questions.length
+    });
+
     if (window.innerWidth < 1024) setIsSidebarOpen(false);
   };
 

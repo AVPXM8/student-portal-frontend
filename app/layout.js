@@ -71,11 +71,12 @@ export default function RootLayout({ children }) {
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            window.gtag = function(){window.dataLayer.push(arguments);}
             gtag('js', new Date());
 
             gtag('config', 'G-18RJ7KXPK4', {
               send_page_view: false,
+              persistence_title: true
             });
           `}
         </Script>

@@ -10,6 +10,7 @@ import {
   RefreshCcw, AlertCircle
 } from 'lucide-react';
 import styles from './PDFViewer.module.css';
+import * as gtag from '@/lib/gtag';
 
 if (typeof window !== 'undefined') {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -82,7 +83,18 @@ useEffect(() => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const pageIndex = parseInt(entry.target.getAttribute('data-page-index'), 10);
-        setPageNumber(pageIndex + 1);
+        const newPage = pageIndex + 1;
+        
+        // Track page view if it's a new page
+        if (newPage !== pageNumber) {
+          gtag.event('pdf_page_view', {
+            pdf_name: title,
+            page_number: newPage,
+            total_pages: numPages
+          });
+        }
+        
+        setPageNumber(newPage);
       }
     });
   }, options);
@@ -98,12 +110,25 @@ const onDocumentLoadSuccess = ({ numPages }) => {
   setNumPages(numPages);
   setIsLoading(false);
   pageRefs.current = new Array(numPages);
+  
+  // Track PDF Open
+  gtag.event('pdf_open', {
+    pdf_name: title,
+    total_pages: numPages,
+    pdf_url: pdfUrl
+  });
 };
 
 const onDocumentLoadError = (err) => {
   console.error('PDF load error:', err);
   setError('Failed to load PDF. Please try again later.');
   setIsLoading(false);
+  
+  // Track PDF Error
+  gtag.event('pdf_error', {
+    pdf_name: title,
+    error_message: err.message
+  });
 };
 
 const changePage = (offset) => {

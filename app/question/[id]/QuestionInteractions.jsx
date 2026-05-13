@@ -19,6 +19,7 @@ import dynamic from 'next/dynamic';
 import ServerMathContent from '@/components/ServerMathContent';
 import { reRenderMathJax } from '@/utils/mathjax';
 import styles from './SingleQuestionPage.module.css';
+import * as gtag from '@/lib/gtag';
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
@@ -73,17 +74,39 @@ export default function QuestionInteractions({
     setSelectedOption(idx);
     setIsSubmitted(true);
     setShowExplanation(true);
+    
+    // Track Question Solve
+    gtag.event('question_solve', {
+      question_id: question?._id,
+      is_correct: question?.options?.[idx]?.isCorrect || false,
+      exam_name: question?.exam
+    });
+
     setTimeout(() => feedbackRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
   };
 
   const toggleExplanation = () => {
-    setShowExplanation(prev => !prev);
+    const nextState = !showExplanation;
+    setShowExplanation(nextState);
+    
+    if (nextState) {
+      gtag.event('explanation_view', {
+        question_id: question?._id
+      });
+    }
+
     setTimeout(reRenderMathJax, 0);
   };
 
   const revealAnswer = () => {
     setIsSubmitted(true);
     setShowExplanation(true);
+    
+    // Track Answer Reveal
+    gtag.event('question_reveal', {
+      question_id: question?._id
+    });
+
     setTimeout(reRenderMathJax, 0);
     setTimeout(() => feedbackRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
   };
