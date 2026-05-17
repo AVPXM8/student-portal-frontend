@@ -138,7 +138,7 @@ export const students = [
   { id: '23-nim-15', name: 'M.O Sameer', year: 2023, exam: 'NIMCET', photoUrl: 'https://res.cloudinary.com/dph6urjjf/image/upload/v1773624672/Mo.sameer_e8tsrj.jpg' },
   { id: '23-nim-16', name: 'Himanshu Sharma', year: 2023, exam: 'NIMCET', photoUrl: 'https://res.cloudinary.com/dph6urjjf/image/upload/v1773624672/Himanshu_sharma_vbj07q.jpg' },
   { id: '23-nim-17', name: 'Ritesh Gupta', year: 2023, exam: 'NIMCET', photoUrl: 'https://res.cloudinary.com/dph6urjjf/image/upload/v1773624671/Ritesh_Gupta_dwwufn.jpg' },
-  
+
   // JAMIA Selections
   { id: '23-jam-18', name: 'Aryan Shukla', year: 2023, exam: 'JAMIA', photoUrl: 'https://res.cloudinary.com/dph6urjjf/image/upload/v1773624848/ARYAN_SHUKLA_qrt0eg.jpg' },
   { id: '23-jam-19', name: 'Nitin Kant', year: 2023, exam: 'JAMIA', photoUrl: 'https://res.cloudinary.com/dph6urjjf/image/upload/v1773624847/NITIN_KANT_di5dk3.jpg' },
@@ -149,10 +149,16 @@ export const students = [
 // Data for the top summary banners
 export const summaryBanners = [
   {
+    id: 'banner-cuet-2026',
+    altText: 'CUET-PG 2026 selected students from Maarula Classes',
+    imageUrl: 'https://res.cloudinary.com/dwmj6up6j/image/upload/v1778990899/CUET-RESULT-2026_whwweu.png'
+
+  },
+  {
     id: 'banner-cuet',
     altText: 'CUET-PG 2025 selected students from Maarula Classes',
     imageUrl: 'https://res.cloudinary.com/dwmj6up6j/image/upload/f_auto,q_auto,w_1920/v1752548234/COMPLETE_o6friz.png'
-  
+
   },
   {
     id: 'banner-igdtuw',
