@@ -23,10 +23,9 @@ export const metadata = {
   },
 };
 
-export default async function Page({ params, searchParams }) {
-  const resolvedParams = await params;
-  const resolvedSearchParams = await searchParams;
+export const dynamic = "force-static";
 
+export default function Page() {
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -59,7 +58,8 @@ export default async function Page({ params, searchParams }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
-      <ClientComp params={resolvedParams} searchParams={resolvedSearchParams} />
+      <ClientComp />
     </>
   );
 }
+

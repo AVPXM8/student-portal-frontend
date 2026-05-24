@@ -59,12 +59,6 @@ const ReportIssuePage = () => {
 
     return (
         <div className={styles.pageContainer}>
-             
-                <title>Report an Issue | Maarula Classes</title>
-                <meta name="description" content="Report an issue with a question in the Maarula Classes question bank. Help us improve our content." />
-                {/* Tell search engines not to show this page in search results */}
-                <meta name="robots" content="noindex, nofollow" />
-            
             <div className={styles.card}>
                 <div className={styles.cardHeader}>
                     <h1>Report an Issue</h1>

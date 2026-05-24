@@ -1,5 +1,6 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import "katex/dist/katex.min.css";
 import Script from "next/script";
 import ConditionalLayout from "@/components/ConditionalLayout";
 import Analytics from "@/components/Analytics";
@@ -40,29 +41,9 @@ export default function RootLayout({ children }) {
         {/* Speed up external resources */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         
-        <Script id="mathjax-config" strategy="beforeInteractive">
-          {`
-            window.MathJax = {
-              tex: {
-                inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
-                displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
-                processEscapes: true
-              },
-              svg: {
-                fontCache: 'global'
-              }
-            };
-          `}
-        </Script>
-        <Script 
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-          strategy="beforeInteractive"
-        />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-18RJ7KXPK4"
@@ -88,3 +69,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+

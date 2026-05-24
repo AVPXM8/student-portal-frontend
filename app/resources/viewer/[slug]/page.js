@@ -1,4 +1,5 @@
 import React from 'react';
+import { notFound } from 'next/navigation';
 import { getPdfBySlug } from '@/utils/pdf';
 import PDFViewer from '@/components/PDFViewer/PDFViewerWrapper';
 import Link from 'next/link';

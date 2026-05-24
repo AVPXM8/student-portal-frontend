@@ -50,18 +50,6 @@ const WHATS_FREE = [
 const AboutPage = () => {
   return (
     <>
-      
-        <title>{`About Mathem Solvex | India's Best Free MCA Entrance Exam Platform by Maarula Classes`}</title>
-        <meta
-          name="description"
-          content="Mathem Solvex by Maarula Classes is India's best free MCA entrance exam resource platform. Get NIMCET, CUET PG, JAMIA, MAH-CET PYQs, AI tutor, PDF downloads — all free. Maarula Classes is India's No.1 MCA entrance coaching institute."
-        />
-        <meta name="keywords" content="where i can get free nimcet material, MCA entrance exam preparation, NIMCET free resources, CUET PG PYQ, free MCA coaching, Maarula Classes, Mathem Solvex, free MCA study material, best MCA entrance coaching, NIMCET coaching" />
-        <link rel="canonical" href="https://question.maarula.in/about" />
-        <meta property="og:title" content="About Mathem Solvex | Best Free MCA Entrance Platform" />
-        <meta property="og:description" content="Looking for free NIMCET material? Mathem Solvex by Maarula Classes — India's No.1 MCA entrance coaching institute — offers free PYQs, AI tutor, and PDF downloads." />
-      
-
       {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroBadge}>

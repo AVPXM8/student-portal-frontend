@@ -1,18 +1,12 @@
 "use client";
 
 import React from 'react';
-import useMathJax from '@/hooks/useMathJax';
 import { renderMathSSR } from '@/utils/renderMathSSR';
 
 const MathPreview = ({ latexString = '', className = '', style = {} }) => {
-  // Guard: don’t let MathJax mutate during the very first paint
-  const [mounted, setMounted] = React.useState(false);
-  const containerRef = React.useRef(null);
-  React.useEffect(() => setMounted(true), []);
-
   const isAlreadyKaTeX = typeof latexString === 'string' && (latexString.includes('class="katex"') || latexString.includes('class=\'katex\''));
 
-  // Clean the string: MathJax 3 hates &nbsp; and some other HTML artifacts inside LaTeX
+  // Clean the string: remove common HTML artifacts inside LaTeX
   const cleaned = React.useMemo(() => {
     if (!latexString) return '';
     let strToClean = typeof latexString === 'string' ? latexString : String(latexString || '');
@@ -34,11 +28,8 @@ const MathPreview = ({ latexString = '', className = '', style = {} }) => {
     return renderMathSSR(cleaned);
   }, [cleaned, isAlreadyKaTeX]);
 
-  useMathJax(!isAlreadyKaTeX ? [cleaned] : [], containerRef);
-
   return (
     <div
-      ref={containerRef}
       className={className}
       style={style}
       dangerouslySetInnerHTML={{ __html: htmlContent }}
@@ -47,3 +38,4 @@ const MathPreview = ({ latexString = '', className = '', style = {} }) => {
 };
 
 export default MathPreview;
+

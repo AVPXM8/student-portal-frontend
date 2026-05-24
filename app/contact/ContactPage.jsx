@@ -46,15 +46,6 @@ const SOCIAL_LINKS = [
 const ContactPage = () => {
   return (
     <>
-      
-        <title>{`Contact Us | Mathem Solvex by Maarula Classes`}</title>
-        <meta
-          name="description"
-          content="Get in touch with Maarula Classes for any queries about MCA entrance exam preparation, our courses, or Mathem Solvex. Call, WhatsApp, or email us."
-        />
-        <link rel="canonical" href="https://question.maarula.in/contact" />
-      
-
       {/* Hero */}
       <section className={styles.hero}>
         <h1>Get in Touch</h1>
