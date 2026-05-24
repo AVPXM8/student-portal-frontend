@@ -332,20 +332,14 @@
   color: var(--ink-900);
 }
 
-.playerWrap {
-  position: relative;
+.playerContainer {
   width: 100%;
-  padding-top: 56.25%;
+  aspect-ratio: 16/9;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--line);
   background: #000;
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-}
-
-.player {
-  position: absolute;
-  inset: 0;
 }
 
 /* ──────── Share bar ──────── */
