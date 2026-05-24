@@ -17,7 +17,8 @@ import {
   X,
   Menu
 } from 'lucide-react';
-import ReactPlayer from 'react-player';
+import dynamic from 'next/dynamic';
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 import api from "@/api";
 import MathPreview from '@/components/MathPreview';
 import styles from "./FullPaperViewPage.module.css";

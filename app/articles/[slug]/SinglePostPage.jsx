@@ -4,7 +4,8 @@ import { useParams } from 'next/navigation';
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
 
-import ReactPlayer from 'react-player';
+import dynamic from 'next/dynamic';
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 import api from "@/api";
 import useMathJax from '@/hooks/useMathJax';
