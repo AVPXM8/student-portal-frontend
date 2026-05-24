@@ -53,7 +53,7 @@ export default function EarlyBirdPopup() {
 
   useEffect(() => {
     setMounted(true);
-    const hasClosed = localStorage.getItem(STORAGE_KEY_CLOSED);
+    const hasClosed = sessionStorage.getItem(STORAGE_KEY_CLOSED);
     setSeats(getSeatsRemaining());
     if (!hasClosed) {
       const t = setTimeout(() => setIsOpen(true), 600);
@@ -69,7 +69,7 @@ export default function EarlyBirdPopup() {
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
-    try { localStorage.setItem(STORAGE_KEY_CLOSED, "true"); } catch {}
+    try { sessionStorage.setItem(STORAGE_KEY_CLOSED, "true"); } catch {}
   }, []);
 
   const handleOverlayClick = useCallback(
