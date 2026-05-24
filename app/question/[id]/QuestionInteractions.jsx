@@ -240,7 +240,7 @@ export default function QuestionInteractions({
         <section id="video-section" className={styles.explanationBox}>
           <h2 className={styles.explanationBox_heading}>Video Solution</h2>
           <div className={styles.playerContainer}>
-            <ReactPlayer url={formatVideoURL(question.videoURL)} width="100%" height="100%" controls />
+            <ReactPlayer src={formatVideoURL(question.videoURL)} width="100%" height="100%" controls />
           </div>
         </section>
       )}

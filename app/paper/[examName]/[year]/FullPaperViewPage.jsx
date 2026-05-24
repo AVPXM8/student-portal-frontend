@@ -327,7 +327,7 @@ const FullPaperViewPage = ({ initialQuestions = [] }) => {
                     <div style={{marginTop: 16}}>
                       <div className={styles.playerContainer}>
                         <ReactPlayer
-                          url={formatVideoURL(currentQ.videoURL)}
+                          src={formatVideoURL(currentQ.videoURL)}
                           width="100%"
                           height="100%"
                           controls

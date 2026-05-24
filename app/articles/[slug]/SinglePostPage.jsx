@@ -295,7 +295,7 @@ export default function SinglePostPage({ initialPost, initialRecentPosts, initia
               <h3 className={styles.h3}>Related Video Explanation</h3>
               <div className={styles.playerContainer}>
                 <ReactPlayer
-                  url={formatVideoURL(post.videoURL)}
+                  src={formatVideoURL(post.videoURL)}
                   width="100%"
                   height="100%"
                   controls

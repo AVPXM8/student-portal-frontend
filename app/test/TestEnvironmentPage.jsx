@@ -584,7 +584,7 @@ const TestEnvironmentPage = () => {
                           )}
                            {fullQuestions[currentIndex]?.videoURL && (
                              <div style={{marginTop: 16, height: 400}}>
-                                <ReactPlayer url={formatVideoURL(fullQuestions[currentIndex].videoURL)} width="100%" height="100%" controls />
+                                <ReactPlayer src={formatVideoURL(fullQuestions[currentIndex].videoURL)} width="100%" height="100%" controls />
                              </div>
                            )}
                        </div>

@@ -230,7 +230,7 @@ export default function SingleQuestionPage() {
           <div className={styles.explanationBox}>
             <h3>Video Solution</h3>
             <div className={styles.playerContainer}>
-              <ReactPlayer url={formatVideoURL(question.videoURL)} width="100%" height="100%" controls />
+              <ReactPlayer src={formatVideoURL(question.videoURL)} width="100%" height="100%" controls />
             </div>
           </div>
         )}
