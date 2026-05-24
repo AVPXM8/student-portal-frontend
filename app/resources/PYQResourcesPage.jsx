@@ -17,16 +17,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 
-const MigrationNotice = () => (
-  <div style={{ backgroundColor: '#fff3cd', color: '#856404', padding: '15px 20px', borderRadius: '8px', margin: '20px 5%', border: '1px solid #ffeeba', fontFamily: 'inherit', lineHeight: '1.6', position: 'relative', zIndex: 10 }}>
-    <h3 style={{ marginTop: 0, marginBottom: '10px', color: '#856404', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.1rem' }}>
-      <AlertCircle size={20} /> Important Migration Notice
-    </h3>
-    <p style={{ marginBottom: '10px', fontSize: '0.95rem' }}>
-      We have recently migrated this portal from React JS to Next.js. If you are experiencing any technical issues, please use the old portal: <a href="https://mathemsolvex.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline', fontWeight: 'bold' }}>https://mathemsolvex.vercel.app/</a>
-    </p>
-  </div>
-);
+
 
 const PYQResourcesPage = ({ localPdfs = [], dynamicResources = {} }) => {
   const { examName } = useParams();
@@ -89,8 +80,6 @@ const PYQResourcesPage = ({ localPdfs = [], dynamicResources = {} }) => {
         <div className={styles.meshGlow}></div>
         <div className={styles.particle1}></div>
         <div className={styles.particle2}></div>
-        
-        <MigrationNotice />
         
         <header className={styles.heroSection}>
           <div className={styles.heroBadge}>

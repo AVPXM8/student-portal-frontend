@@ -24,19 +24,6 @@ const DEFAULT_OG_IMAGE = `${SITE_URL}/og/maarula-question-bank.png`;
 const absUrl = (path, query = '') => `${SITE_URL}${path}${query ? `?${query}` : ''}`;
 const sanitizePath = (p) => p.replace(/\/{2,}/g, '/');
 
-const MigrationNotice = () => (
-  <div style={{ backgroundColor: '#fff3cd', color: '#856404', padding: '15px 20px', borderRadius: '8px', margin: '20px 5%', border: '1px solid #ffeeba', fontFamily: 'inherit', lineHeight: '1.6', position: 'relative', zIndex: 10 }}>
-    <h3 style={{ marginTop: 0, marginBottom: '10px', color: '#856404', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.1rem' }}>
-      <AlertCircle size={20} /> Important Migration Notice
-    </h3>
-    <p style={{ marginBottom: '10px', fontSize: '0.95rem' }}>
-      We have recently migrated this portal from React JS to Next.js, and the setup is currently under migration. If you are experiencing any technical issues (e.g., while giving mock tests), please use the old portal: <a href="https://mathemsolvex.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline', fontWeight: 'bold' }}>https://mathemsolvex.vercel.app/</a>
-    </p>
-    <p style={{ margin: 0, fontSize: '0.95rem' }}>
-      If you have suggestions or want to help with the process, please contact the developer via LinkedIn: <a href="https://www.linkedin.com/in/vivek33pal" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline', fontWeight: 'bold' }}>Vivek Kumar</a> or WhatsApp: <a href="https://wa.me/919354368207" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline', fontWeight: 'bold' }}>+91 9354368207</a>. We are working hard to help you out. Best of luck! <br />— Vivek Kumar
-    </p>
-  </div>
-);
 
 /* -------------------------------------------------------------------------- */
 /*  STABLE FILTER FORM (OUTSIDE PARENT) — includes Year + filter skeleton     */
@@ -672,8 +659,6 @@ const QuestionLibraryPage = ({ initialQuestions = [], initialTotalDocs = 0, init
       <script type="application/ld+json">{JSON.stringify(webPageSchema)}</script>
       {itemListSchema && <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>}
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-
-      <MigrationNotice />
 
       {/* Hero / Intro */}
       <section className={styles.heroSection}>
