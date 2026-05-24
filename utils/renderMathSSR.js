@@ -106,8 +106,8 @@ export function renderMarkdownAndMath(markdown = '') {
 
   const mathBlocks = [];
 
-  // 1. Extract and pre-render LaTeX math to avoid markdown parsing inside math expressions
-  let text = markdown;
+  // Pre-process: normalize escaped dollar signs to raw dollar signs for flawless matching and rendering
+  let text = markdown.replace(/\\(\$)/g, '$1');
 
   // Display math $$...$$
   text = text.replace(/\$\$([\s\S]*?)\$\$/g, (_, tex) => {
