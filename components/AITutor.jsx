@@ -77,7 +77,17 @@ const AITutor = ({ questionId, question }) => {
                 questionContext: questionContext,
             });
 
-            setMessages(prev => [...prev, { role: 'model', text: res.data.text }]);
+            let responseText = res.data.text || '';
+            const isOutOfScope = responseText.includes("typical scope") || 
+                                 responseText.includes("outside the typical scope") || 
+                                 responseText.includes("help only with MCA") ||
+                                 responseText.includes("LeetCode");
+
+            if (isOutOfScope) {
+                responseText = `Hi! I am an AI bot trained to help you with **NIMCET, CUET, and MCA entrance related questions**. \n\nYour question is out of my expertise as I have not been trained on that yet. However, I am still learning so that I can help you in a better way, so please ask me questions related to these entrance exams! I am upgrading myself to help you in all areas. \n\nIf you think this is a mistake, you can email Vivek to increase the training data and include this topic also. ✉️`;
+            }
+
+            setMessages(prev => [...prev, { role: 'model', text: responseText }]);
 
             if (res.data.relatedIds && res.data.relatedIds.length > 0) {
                 setMessages(prev => [...prev, {
