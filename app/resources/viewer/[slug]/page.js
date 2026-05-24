@@ -1,10 +1,22 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { getPdfBySlug } from '@/utils/pdf';
+import { getPdfBySlug, getAllPdfs } from '@/utils/pdf';
 import PDFViewer from '@/components/PDFViewer/PDFViewerWrapper';
 import Link from 'next/link';
 import { ArrowLeft, Home, Share2 } from 'lucide-react';
 import styles from './ResourceViewerPage.module.css';
+
+export const revalidate = 86400; // 24 hours ISR
+export const dynamicParams = true; // allow on-demand generation for new dynamic parameters
+
+
+export async function generateStaticParams() {
+  const allPdfs = await getAllPdfs();
+  return allPdfs.map((pdf) => ({
+    slug: pdf.slug,
+  }));
+}
+
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

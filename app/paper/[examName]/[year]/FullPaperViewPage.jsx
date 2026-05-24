@@ -45,10 +45,10 @@ const getSectionWeight = (subjectName) => {
   return SECTION_ORDER[normalized] || 99;
 };
 
-const FullPaperViewPage = () => {
+const FullPaperViewPage = ({ initialQuestions = [] }) => {
   const { examName, year } = useParams();
-  const [questions, setQuestions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [questions, setQuestions] = useState(initialQuestions);
+  const [loading, setLoading] = useState(initialQuestions.length === 0);
   const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState({});
@@ -70,6 +70,12 @@ const FullPaperViewPage = () => {
 
   // Fetch paper
   useEffect(() => {
+    if (initialQuestions && initialQuestions.length > 0) {
+      setQuestions(initialQuestions);
+      setLoading(false);
+      return;
+    }
+
     const fetchPaper = async () => {
       setLoading(true);
       setError(null);
@@ -107,7 +113,8 @@ const FullPaperViewPage = () => {
     if (examName && year) {
       fetchPaper();
     }
-  }, [examName, year]);
+  }, [examName, year, initialQuestions]);
+
 
   // Handle navigation
   const goToNext = () => {

@@ -3,6 +3,17 @@ import { getDynamicResources, getAllPdfs } from '@/utils/pdf';
 
 const SITE_URL = 'https://question.maarula.in';
 
+export const revalidate = 3600; // 1 hour ISR
+export const dynamicParams = true; // allow on-demand generation for new dynamic parameters
+
+
+export async function generateStaticParams() {
+  const dynamicResources = await getDynamicResources();
+  return Object.keys(dynamicResources).map((examName) => ({
+    examName: encodeURIComponent(examName),
+  }));
+}
+
 export async function generateMetadata({ params }) {
   const { examName } = await params;
   const decoded = decodeURIComponent(examName);
@@ -49,9 +60,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function Page({ params, searchParams }) {
+export default async function Page({ params }) {
   const resolvedParams = await params;
-  const resolvedSearchParams = await searchParams;
   const decoded = decodeURIComponent(resolvedParams.examName || '');
 
   // Fetch dynamic resources to pass to ClientComp
@@ -72,11 +82,10 @@ export default async function Page({ params, searchParams }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <ClientComp 
-        params={resolvedParams} 
-        searchParams={resolvedSearchParams} 
         localPdfs={localPdfs}
         dynamicResources={dynamicResources}
       />
     </>
   );
 }
+
