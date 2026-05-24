@@ -9,6 +9,7 @@
  */
 
 import katex from 'katex';
+import { marked } from 'marked';
 
 const KATEX_OPTS_INLINE = {
   throwOnError: false,
@@ -93,8 +94,8 @@ export function toPlainTextSSR(s = '') {
 }
 
 /**
- * Parses simple markdown (headings, lists, bold, italics, code) and renders KaTeX mathematical
- * formulas (delimiters: $$, \[, \], $, \() to clean, premium HTML.
+ * Parses markdown (including headings down to h6, blockquotes, code, tables, bold, italics) and
+ * renders KaTeX mathematical formulas (delimiters: $$, \[, \], $, \() to clean, premium HTML.
  * Resolves mathematical delimiters before parsing markdown to avoid style corruption inside math.
  *
  * @param {string} markdown - Input markdown string with optional LaTeX formulas
@@ -172,90 +173,18 @@ export function renderMarkdownAndMath(markdown = '') {
     return `@@MATH_PLACEHOLDER_${mathBlocks.length - 1}@@`;
   });
 
-  // 2. Parse Markdown blocks line-by-line
-  const lines = text.split('\n');
-  let htmlResult = [];
-  let inList = false;
-  let listType = null; // 'ul' or 'ol'
-
-  const closeListIfNeeded = () => {
-    if (inList) {
-      htmlResult.push(`</${listType}>`);
-      inList = false;
-      listType = null;
-    }
-  };
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    const trimmed = line.trim();
-
-    if (!trimmed) {
-      closeListIfNeeded();
-      continue;
-    }
-
-    // Headings
-    if (trimmed.startsWith('### ')) {
-      closeListIfNeeded();
-      htmlResult.push(`<h3>${inlineStyles(trimmed.slice(4))}</h3>`);
-      continue;
-    }
-    if (trimmed.startsWith('## ')) {
-      closeListIfNeeded();
-      htmlResult.push(`<h2>${inlineStyles(trimmed.slice(3))}</h2>`);
-      continue;
-    }
-    if (trimmed.startsWith('# ')) {
-      closeListIfNeeded();
-      htmlResult.push(`<h1>${inlineStyles(trimmed.slice(2))}</h1>`);
-      continue;
-    }
-
-    // Unordered lists
-    const ulMatch = line.match(/^(\s*)[-*+]\s+(.*)/);
-    if (ulMatch) {
-      if (!inList || listType !== 'ul') {
-        closeListIfNeeded();
-        htmlResult.push('<ul>');
-        inList = true;
-        listType = 'ul';
-      }
-      htmlResult.push(`<li>${inlineStyles(ulMatch[2])}</li>`);
-      continue;
-    }
-
-    // Ordered lists
-    const olMatch = line.match(/^(\s*)\d+\.\s+(.*)/);
-    if (olMatch) {
-      if (!inList || listType !== 'ol') {
-        closeListIfNeeded();
-        htmlResult.push('<ol>');
-        inList = true;
-        listType = 'ol';
-      }
-      htmlResult.push(`<li>${inlineStyles(olMatch[2])}</li>`);
-      continue;
-    }
-
-    // Otherwise, it's a regular text block/paragraph line
-    closeListIfNeeded();
-    
-    // Look ahead to see if the next lines are also paragraph text
-    let paragraphContent = inlineStyles(trimmed);
-    while (i + 1 < lines.length && lines[i + 1].trim() !== '' && 
-           !lines[i + 1].trim().startsWith('#') && 
-           !/^(\s*)[-*+]\s+/.test(lines[i + 1]) && 
-           !/^(\s*)\d+\.\s+/.test(lines[i + 1])) {
-      i++;
-      paragraphContent += '<br />' + inlineStyles(lines[i].trim());
-    }
-    htmlResult.push(`<p>${paragraphContent}</p>`);
+  // 2. Parse Markdown using the robust, standard `marked` library
+  let finalHtml = '';
+  try {
+    // Configure marked options to preserve newlines and utilize Github Flavored Markdown
+    finalHtml = marked.parse(text, {
+      breaks: true,
+      gfm: true
+    });
+  } catch (err) {
+    console.error("Marked parsing error in renderMarkdownAndMath:", err);
+    finalHtml = text;
   }
-
-  closeListIfNeeded();
-
-  let finalHtml = htmlResult.join('\n');
 
   // 3. Restore the math placeholders with pre-rendered KaTeX HTML
   mathBlocks.forEach((mathHtml, index) => {
@@ -263,22 +192,5 @@ export function renderMarkdownAndMath(markdown = '') {
   });
 
   return finalHtml;
-}
-
-function inlineStyles(text) {
-  if (!text) return '';
-  return text
-    // Escape standard text characters that might break HTML but keep our placeholders clean
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    // Restore raw characters within math placeholders
-    .replace(/@@MATH_PLACEHOLDER_(\d+)@@/g, (_, index) => `@@MATH_PLACEHOLDER_${index}@@`)
-    // Bold: **text**
-    .replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>')
-    // Italic: *text*
-    .replace(/\*([\s\S]+?)\*/g, '<em>$1</em>')
-    // Inline code: `code`
-    .replace(/`([\s\S]+?)`/g, '<code>$1</code>');
 }
 
