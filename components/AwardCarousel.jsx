@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import styles from './AwardCarousel.module.css';
 
 const awardWinners = [
@@ -37,11 +38,13 @@ const AwardCarousel = () => {
       <div className={styles.scroller}>
         {allImages.map((winner, index) => (
           <div className={styles.card} key={index}>
-            <img
+            <Image
               src={winner.imageUrl}
               alt={`Award winner ${winner.name}`}
               className={styles.cardImage}
-              loading="lazy"
+              width={150}
+              height={200}
+              sizes="150px"
             />
             <div className={styles.cardOverlay}>
               <p className={styles.cardName}>{winner.name}</p>

@@ -17,9 +17,9 @@ import Image from 'next/image';
 import Breadcrumb from '@/components/Breadcrumb';
 import ServerMathContent from '@/components/ServerMathContent';
 import QuestionInteractions from './QuestionInteractions';
-import AITutor from '@/components/AITutor';
 import { renderMathSSR, toPlainTextSSR } from '@/utils/renderMathSSR';
 import styles from './SingleQuestionPage.module.css';
+
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
 const SITE_URL = 'https://question.maarula.in';
@@ -324,9 +324,6 @@ export default async function Page({ params, searchParams }) {
                 style={{ width: '100%', height: 'auto' }}
               />
             )}
-
-            {/* AI Tutor */}
-            <AITutor questionId={question._id} question={question} />
 
             {/* Options header */}
             <h2 className={styles.optionsHeader} id="options-heading">

@@ -22,6 +22,7 @@ import styles from './SingleQuestionPage.module.css';
 import * as gtag from '@/lib/gtag';
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
+const AITutor = dynamic(() => import('@/components/AITutor'), { ssr: false });
 
 /**
  * @param {object} props
@@ -115,6 +116,8 @@ export default function QuestionInteractions({
 
   return (
     <>
+      <AITutor questionId={question?._id} question={question} />
+
       {/* ── Options (interactive buttons wrapping server-rendered content) ── */}
       <section aria-label="Answer options" className={styles.optionsGrid}>
         {question?.options?.map((opt, idx) => {

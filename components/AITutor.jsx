@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, X, Bot, Sparkles, Link as LinkIcon } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
+import { renderMarkdownAndMath } from '@/utils/renderMathSSR';
 import MathPreview from './MathPreview';
 import api from "@/api";
 
@@ -110,9 +110,10 @@ const AITutor = ({ questionId, question }) => {
     const renderMessageContent = (m) => {
         if (m.role === 'model') {
             return (
-                <div className={styles.markdownContent}>
-                    <ReactMarkdown>{m.text}</ReactMarkdown>
-                </div>
+                <div 
+                    className={styles.markdownContent}
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownAndMath(m.text) }}
+                />
             );
         }
         // User messages — plain text

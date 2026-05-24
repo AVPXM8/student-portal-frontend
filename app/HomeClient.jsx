@@ -1,15 +1,28 @@
 "use client";
 
-import React, { lazy, Suspense, useMemo, useEffect, useRef } from "react";
+import React, { useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import styles from "./HomePage.module.css";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
 import { students } from '@/data/students';
 
-const SuccessCarousel = lazy(() => import("../components/SuccessCarousel"));
-const AwardCarousel  = lazy(() => import("../components/AwardCarousel"));
-const ClassroomSlider = lazy(() => import("../components/ClassroomSlider"));
+const SuccessCarousel = dynamic(() => import("../components/SuccessCarousel"), {
+  ssr: false,
+  loading: () => <div className={styles.skeletonHero} />
+});
+
+const AwardCarousel = dynamic(() => import("../components/AwardCarousel"), {
+  ssr: false,
+  loading: () => <div className={styles.skeleton} />
+});
+
+const ClassroomSlider = dynamic(() => import("../components/ClassroomSlider"), {
+  ssr: false,
+  loading: () => <div className={styles.skeleton} />
+});
+
 
 function RevealSection({ children, className = "", style = {} }) {
   const sectionRef = useRef(null);
@@ -46,9 +59,7 @@ export default function HomeClient() {
     <div className={styles.homePage}>
       {/* HERO SECTION */}
       <header className={styles.heroSection}>
-        <Suspense fallback={<div className={styles.skeletonHero} />}>
-          <SuccessCarousel />
-        </Suspense>
+        <SuccessCarousel />
       </header>
 
       {/* PRIMARY SEO INTRO */}
@@ -138,9 +149,7 @@ export default function HomeClient() {
           <p className={styles.sectionSubtitle}>Celebrating the excellence of our top-ranking students.</p>
         </RevealSection>
         
-        <Suspense fallback={<div className={styles.skeleton} />}>
-          <AwardCarousel />
-        </Suspense>
+        <AwardCarousel />
 
         <div className={styles.viewAllContainer}>
           <Link href="/results" className={styles.viewAllButton}>
@@ -171,9 +180,7 @@ export default function HomeClient() {
         </RevealSection>
 
         <RevealSection className={styles.introImageContainer}>
-          <Suspense fallback={<div className={styles.skeleton} />}>
-            <ClassroomSlider />
-          </Suspense>
+          <ClassroomSlider />
         </RevealSection>
       </section>
     </div>
