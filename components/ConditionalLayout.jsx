@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import BottomNav from "@/components/BottomNav";
 import FloatingSocialBar from "@/components/FloatingSocialBar";
 import { Toaster } from 'react-hot-toast';
+import EarlyBirdPopup from "@/components/EarlyBirdPopup";
 
 export default function ConditionalLayout({ children }) {
   const pathname = usePathname();
@@ -16,6 +17,7 @@ export default function ConditionalLayout({ children }) {
       <main className="main-content-wrapper">
         {children}
         <Toaster position="top-center" reverseOrder={false} />
+        <EarlyBirdPopup />
       </main>
     );
   }
@@ -28,6 +30,7 @@ export default function ConditionalLayout({ children }) {
       <BottomNav />
       <FloatingSocialBar />
       <Toaster position="top-center" reverseOrder={false} />
+      <EarlyBirdPopup />
     </>
   );
 }
