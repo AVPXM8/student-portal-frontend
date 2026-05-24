@@ -15,6 +15,16 @@ import * as gtag from '@/lib/gtag';
 // Dynamically import ReactPlayer to prevent hydration issues
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
+const formatVideoURL = (url) => {
+  if (!url || typeof url !== 'string') return '';
+  const cleanUrl = url.trim();
+  const liveMatch = cleanUrl.match(/https?:\/\/(?:www\.)?youtube\.com\/live\/([a-zA-Z0-9_-]+)/i);
+  if (liveMatch) return `https://www.youtube.com/watch?v=${liveMatch[1]}`;
+  const shortsMatch = cleanUrl.match(/https?:\/\/(?:www\.)?youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/i);
+  if (shortsMatch) return `https://www.youtube.com/watch?v=${shortsMatch[1]}`;
+  return cleanUrl;
+};
+
 // Ordering for sections in palette
 const SECTION_ORDER = {
   'MATHEMATICS': 1,
@@ -572,11 +582,11 @@ const TestEnvironmentPage = () => {
                           {fullQuestions[currentIndex]?.explanationImageURL && (
                             <img src={fullQuestions[currentIndex].explanationImageURL} alt="Explanation" style={{maxWidth: '100%', borderRadius: 8, marginTop: 16}} />
                           )}
-                          {fullQuestions[currentIndex]?.videoURL && (
-                            <div style={{marginTop: 16, height: 400}}>
-                               <ReactPlayer url={fullQuestions[currentIndex].videoURL} width="100%" height="100%" controls />
-                            </div>
-                          )}
+                           {fullQuestions[currentIndex]?.videoURL && (
+                             <div style={{marginTop: 16, height: 400}}>
+                                <ReactPlayer url={formatVideoURL(fullQuestions[currentIndex].videoURL)} width="100%" height="100%" controls />
+                             </div>
+                           )}
                        </div>
                      )}
                   </div>

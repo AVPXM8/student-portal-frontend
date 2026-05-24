@@ -19,6 +19,16 @@ import {
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
+
+const formatVideoURL = (url) => {
+  if (!url || typeof url !== 'string') return '';
+  const cleanUrl = url.trim();
+  const liveMatch = cleanUrl.match(/https?:\/\/(?:www\.)?youtube\.com\/live\/([a-zA-Z0-9_-]+)/i);
+  if (liveMatch) return `https://www.youtube.com/watch?v=${liveMatch[1]}`;
+  const shortsMatch = cleanUrl.match(/https?:\/\/(?:www\.)?youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/i);
+  if (shortsMatch) return `https://www.youtube.com/watch?v=${shortsMatch[1]}`;
+  return cleanUrl;
+};
 import api from "@/api";
 import MathPreview from '@/components/MathPreview';
 import styles from "./FullPaperViewPage.module.css";
@@ -317,7 +327,7 @@ const FullPaperViewPage = ({ initialQuestions = [] }) => {
                     <div style={{marginTop: 16}}>
                       <div className={styles.playerContainer}>
                         <ReactPlayer
-                          url={currentQ.videoURL}
+                          url={formatVideoURL(currentQ.videoURL)}
                           width="100%"
                           height="100%"
                           controls

@@ -22,6 +22,16 @@ import styles from './SingleQuestionPage.module.css';
 import * as gtag from '@/lib/gtag';
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
+
+const formatVideoURL = (url) => {
+  if (!url || typeof url !== 'string') return '';
+  const cleanUrl = url.trim();
+  const liveMatch = cleanUrl.match(/https?:\/\/(?:www\.)?youtube\.com\/live\/([a-zA-Z0-9_-]+)/i);
+  if (liveMatch) return `https://www.youtube.com/watch?v=${liveMatch[1]}`;
+  const shortsMatch = cleanUrl.match(/https?:\/\/(?:www\.)?youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/i);
+  if (shortsMatch) return `https://www.youtube.com/watch?v=${shortsMatch[1]}`;
+  return cleanUrl;
+};
 const AITutor = dynamic(() => import('@/components/AITutor'), { ssr: false });
 
 /**
@@ -230,7 +240,7 @@ export default function QuestionInteractions({
         <section id="video-section" className={styles.explanationBox}>
           <h2 className={styles.explanationBox_heading}>Video Solution</h2>
           <div className={styles.playerContainer}>
-            <ReactPlayer url={question.videoURL} width="100%" height="100%" controls />
+            <ReactPlayer url={formatVideoURL(question.videoURL)} width="100%" height="100%" controls />
           </div>
         </section>
       )}

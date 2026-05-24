@@ -7,6 +7,16 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from 'next/dynamic';
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
+const formatVideoURL = (url) => {
+  if (!url || typeof url !== 'string') return '';
+  const cleanUrl = url.trim();
+  const liveMatch = cleanUrl.match(/https?:\/\/(?:www\.)?youtube\.com\/live\/([a-zA-Z0-9_-]+)/i);
+  if (liveMatch) return `https://www.youtube.com/watch?v=${liveMatch[1]}`;
+  const shortsMatch = cleanUrl.match(/https?:\/\/(?:www\.)?youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/i);
+  if (shortsMatch) return `https://www.youtube.com/watch?v=${shortsMatch[1]}`;
+  return cleanUrl;
+};
+
 import api from "@/api";
 import useMathJax from '@/hooks/useMathJax';
 import Breadcrumb from '@/components/Breadcrumb';
@@ -285,7 +295,7 @@ export default function SinglePostPage({ initialPost, initialRecentPosts, initia
               <h3 className={styles.h3}>Related Video Explanation</h3>
               <div className={styles.playerWrap}>
                 <ReactPlayer
-                  url={post.videoURL}
+                  url={formatVideoURL(post.videoURL)}
                   className={styles.player}
                   width="100%"
                   height="100%"
