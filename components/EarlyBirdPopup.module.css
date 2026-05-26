@@ -280,3 +280,14 @@
     padding: 12px 13px;
   }
 }
+
+/* A11Y: Respect reduced motion preferences for all popup animations */
+@media (prefers-reduced-motion: reduce) {
+  .overlay { animation: none; }
+  .modal { animation: none; }
+  .scarcityBox { animation: none; }
+  .ctaButton { animation: none; }
+  .ctaButton:hover { transform: none; }
+  .closeBtn:hover { transform: none; }
+  .copyBtn:hover { transform: none; }
+}

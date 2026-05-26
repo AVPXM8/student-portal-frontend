@@ -36,7 +36,8 @@
   flex: 1;
   color: #64748b;
   text-decoration: none;
-  font-size: 0.65rem;
+  /* A11Y: Increased from 0.65rem for better readability on touch devices */
+  font-size: 0.7rem;
   font-weight: 500;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;

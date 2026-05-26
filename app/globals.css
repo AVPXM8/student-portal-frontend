@@ -88,6 +88,13 @@ a {
 button {
   font-family: inherit;
   cursor: pointer;
+  /* UX: Eliminate 300ms tap delay on touch devices */
+  touch-action: manipulation;
+}
+
+/* UX: Eliminate tap delay on all interactive elements */
+a, button, [role="button"], input, select, textarea {
+  touch-action: manipulation;
 }
 
 /* Glassmorphism Utility */
@@ -128,4 +135,12 @@ button {
 
 .fade-in {
   animation: fadeIn 0.5s ease forwards;
+}
+
+/* A11Y: Respect reduced motion preferences globally */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+    opacity: 1;
+  }
 }

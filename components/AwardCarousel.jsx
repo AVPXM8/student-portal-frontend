@@ -39,12 +39,15 @@ const AwardCarousel = () => {
         {allImages.map((winner, index) => (
           <div className={styles.card} key={index}>
             <Image
+              /* Reverted Cloudinary transform due to 401 unauthorized error on this account */
               src={winner.imageUrl}
               alt={`Award winner ${winner.name}`}
               className={styles.cardImage}
-              width={150}
-              height={200}
-              sizes="150px"
+              width={250}
+              height={350}
+              sizes="250px"
+              /* PERF: All award images are below-fold in a marquee — lazy load */
+              loading="lazy"
             />
             <div className={styles.cardOverlay}>
               <p className={styles.cardName}>{winner.name}</p>

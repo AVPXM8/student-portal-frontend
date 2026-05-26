@@ -28,8 +28,9 @@
   z-index: 1001;
 }
 
+/* CLS FIX: Use transform instead of margin-top to hide top bar — prevents layout shift */
 .scrolled .topBar {
-  margin-top: -42px;
+  transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
 }
@@ -106,22 +107,25 @@
   transform: scale(1.05);
 }
 
-.brandName h2 {
+/* SEO: Selectors updated for span-based branding (no heading tags in header) */
+.brandTitle {
   font-size: 1.4rem;
   font-weight: 850;
   letter-spacing: -0.03em;
   color: #0f172a;
   line-height: 1;
   margin-bottom: 2px;
+  display: block;
 }
 
-.brandName p {
+.brandTagline {
   font-size: 0.65rem;
   color: var(--primary);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin: 0;
+  display: block;
 }
 
 /* Desktop Navigation */
@@ -334,11 +338,12 @@
   .logo {
     height: 38px;
   }
-  .brandName h2 {
+  .brandTitle {
     font-size: 1.1rem;
   }
-  .brandName p {
-    font-size: 0.55rem;
+  .brandTagline {
+    /* A11Y: Increased from 0.55rem to meet WCAG minimum readable size */
+    font-size: 0.6rem;
   }
   .scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
   .loginButton { display: none; }

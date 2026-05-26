@@ -6,15 +6,17 @@
 }
 
 /* Flexibly container that grows to fit the full image height */
+/* CLS FIX: Reserve space with aspect-ratio before carousel JS loads */
 .aspectBox{
   position: relative;
   width: 100%;
-  max-height: 850px; /* Increased max height significantly for a larger banner */
+  max-height: 850px;
   background: #fdfdfd;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  aspect-ratio: 2 / 1; /* Prevents layout shift by reserving proportional space */
 }
 
 /* Show the FULL image without ANY cropping */

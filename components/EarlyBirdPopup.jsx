@@ -111,7 +111,8 @@ export default function EarlyBirdPopup() {
             width={1080}
             height={1080}
             className={styles.heroImage}
-            priority
+            /* PERF: Removed priority — popup opens 600ms after load, no need to preload 197KB image */
+            loading="lazy"
           />
         </div>
 

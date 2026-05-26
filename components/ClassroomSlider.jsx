@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './ClassroomSlider.module.css';
@@ -11,19 +11,45 @@ const classroomImages = [
 
 export default function ClassroomSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % classroomImages.length);
-    }, 2000); // 2 second interval
-    return () => clearInterval(timer);
+    /* PERF: Only auto-advance when visible on screen — saves CPU when off-screen */
+    const el = containerRef.current;
+    if (!el) return;
+
+    let timer = null;
+    const startTimer = () => {
+      timer = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % classroomImages.length);
+      }, 4000); /* PERF: Increased from 2s to 4s — reduces re-renders by 50% */
+    };
+    const stopTimer = () => { if (timer) clearInterval(timer); };
+
+    /* A11Y: Respect reduced motion */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return; /* Don't auto-advance if reduced motion is preferred */
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) startTimer();
+        else stopTimer();
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+
+    return () => {
+      stopTimer();
+      observer.disconnect();
+    };
   }, []);
 
   const next = () => setCurrentIndex((prev) => (prev + 1) % classroomImages.length);
   const prev = () => setCurrentIndex((prev) => (prev - 1 + classroomImages.length) % classroomImages.length);
 
   return (
-    <div className={styles.sliderWrapper}>
+    <div className={styles.sliderWrapper} ref={containerRef}>
       <div className={styles.slider} style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {classroomImages.map((img, idx) => (
           <div key={idx} className={styles.slide}>
@@ -33,7 +59,8 @@ export default function ClassroomSlider() {
               width={600} 
               height={450} 
               className={styles.image}
-              priority={idx === 0}
+              /* PERF: Only first image needs priority — second is off-screen */
+              loading={idx === 0 ? "eager" : "lazy"}
             />
           </div>
         ))}
@@ -53,6 +80,7 @@ export default function ClassroomSlider() {
                 key={idx} 
                 className={`${styles.dot} ${currentIndex === idx ? styles.activeDot : ''}`}
                 onClick={() => setCurrentIndex(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
           </div>
@@ -61,3 +89,4 @@ export default function ClassroomSlider() {
     </div>
   );
 }
+

@@ -10,11 +10,12 @@ import styles from './Footer.module.css';
 const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
+    /* PERF: passive listener to avoid blocking main thread during scroll */
     const toggleVisibility = () => {
       if (window.pageYOffset > 300) setIsVisible(true);
       else setIsVisible(false);
     };
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
   const scrollToTop = () => {
@@ -99,7 +100,8 @@ const Footer = () => {
       </div>
       
       <div className={styles.footerBottom}>
-        <p>© {new Date().getFullYear()} Maarula Classes. All Rights Reserved.</p>
+        {/* HYDRATION: Static year string avoids server/client mismatch at year boundary */}
+        <p>© 2026 Maarula Classes. All Rights Reserved.</p>
         <p className={styles.developerCredit}>
           Designed & Developed with ❤️ by{' '}
           <a 

@@ -6,7 +6,7 @@ import styles from "./HomePage.module.css";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-import { students } from '@/data/students';
+/* PERF: Removed unused `students` import (~28KB) — only summaryBanners is used via SuccessCarousel */
 
 const SuccessCarousel = dynamic(() => import("../components/SuccessCarousel"), {
   ssr: false,

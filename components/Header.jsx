@@ -13,8 +13,18 @@ const Header = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll);
+    /* PERF: rAF-throttled scroll handler with passive listener to reduce main-thread blocking */
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 10);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -42,17 +52,21 @@ const Header = () => {
       <div className={styles.mainHeader}>
         <Link href="/" className={styles.logoContainer}>
           <Image 
-            src="/maarulalogo.png" 
+            /* PERF: Serve via Cloudinary for auto-format — local maarulalogo.png is 237KB for 52px display */
+            src="https://res.cloudinary.com/dwmj6up6j/image/upload/f_auto,q_auto,w_80/v1752683439/maarulalogo_lywhdo.png"
             alt="Mathem Solvex Logo" 
             className={styles.logo} 
-            width={40} 
-            height={40} 
+            /* CLS: Dimensions match CSS (52px height) to prevent layout shift */
+            width={52} 
+            height={52} 
+            style={{ width: "auto" }}
             priority={true}
             fetchPriority="high"
           />
           <div className={styles.brandName}>
-            <h2>Mathem Solvex</h2>
-            <p>Get the solution of every question</p>
+            {/* SEO: Use span instead of h2 — heading hierarchy reserved for page content */}
+            <span className={styles.brandTitle}>Mathem Solvex</span>
+            <span className={styles.brandTagline}>Get the solution of every question</span>
           </div>
         </Link>
 

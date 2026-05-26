@@ -103,3 +103,12 @@
   50% { width: 50%; }
   100% { left: 100%; width: 30%; }
 }
+
+/* A11Y: Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .pulsingCircle,
+  .pulsingCircleDelayed { animation: none; opacity: 0.15; }
+  .loaderLogo { animation: none; }
+  .dot { animation: none; opacity: 0.6; }
+  .progressFill { animation: none; width: 60%; left: 20%; }
+}

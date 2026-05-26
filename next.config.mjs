@@ -9,6 +9,10 @@ const nextConfig = {
     // Serve modern formats automatically
     formats: ['image/avif', 'image/webp'],
   },
+  /* PERF: Tree-shake icon libraries — only include used icons in bundle */
+  experimental: {
+    optimizePackageImports: ['react-icons', 'lucide-react'],
+  },
   // Compress responses for faster delivery
   compress: true,
   // Add security and caching headers

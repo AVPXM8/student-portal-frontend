@@ -17,7 +17,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import ServerMathContent from '@/components/ServerMathContent';
-import { reRenderMathJax } from '@/utils/mathjax';
+/* PERF: Removed dead reRenderMathJax import — KaTeX is server-rendered, no client re-rendering needed */
 import styles from './SingleQuestionPage.module.css';
 import * as gtag from '@/lib/gtag';
 
@@ -106,7 +106,7 @@ export default function QuestionInteractions({
       });
     }
 
-    setTimeout(reRenderMathJax, 0);
+
   };
 
   const revealAnswer = () => {
@@ -118,7 +118,7 @@ export default function QuestionInteractions({
       question_id: question?._id
     });
 
-    setTimeout(reRenderMathJax, 0);
+
     setTimeout(() => feedbackRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
   };
 

@@ -20,14 +20,18 @@ const BottomNav = () => {
   if (pathname.startsWith('/test')) return null;
 
   return (
-    <nav className={styles.bottomNav}>
+    /* A11Y: aria-label for screen readers */
+    <nav className={styles.bottomNav} aria-label="Main navigation">
       <div className={styles.container}>
         {navItems.map((item) => {
           const isActive = pathname === item.href || 
             (item.href !== '/' && pathname.startsWith(item.href)) ||
             (item.href === '/questions' && pathname.startsWith('/question'));
           return (
-            <Link key={item.href} href={item.href} className={`${styles.navItem} ${isActive ? styles.active : ''}`}>
+            <Link key={item.href} href={item.href} className={`${styles.navItem} ${isActive ? styles.active : ''}`}
+              /* A11Y: Indicate current page to screen readers */
+              aria-current={isActive ? 'page' : undefined}
+            >
               <item.icon size={22} className={styles.icon} />
               <span className={styles.label}>{item.label}</span>
               {isActive && <div className={styles.indicator} />}
