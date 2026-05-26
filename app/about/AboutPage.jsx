@@ -87,14 +87,26 @@ const AboutPage = () => {
               <p>
                 Our expert faculty provides focused, subject-specialist mentoring for Mathematics, Computer Science, Logical Reasoning, and English — all tailored specifically for the MCA entrance exam pattern. We believe every student — regardless of financial background — deserves access to the best quality preparation material. That's why everything on Mathem Solvex is <strong>completely free</strong>.
               </p>
-              <a
-                href="https://www.linkedin.com/in/vivek33pal"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.founderLink}
-              >
-                <FaLinkedin size={18} /> Connect with Vivek Kumar on LinkedIn <ArrowRight size={14} />
-              </a>
+              <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginTop: '20px' }}>
+                <a
+                  href="https://vivekducs.is-a.dev/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.founderLink}
+                  style={{ marginTop: 0 }}
+                >
+                  <ExternalLink size={18} /> Portfolio <ArrowRight size={14} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/vivekducs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.founderLink}
+                  style={{ marginTop: 0 }}
+                >
+                  <FaLinkedin size={18} /> LinkedIn <ArrowRight size={14} />
+                </a>
+              </div>
             </div>
             <div className={styles.statsBlock}>
               <div className={styles.statCard}>

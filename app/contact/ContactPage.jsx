@@ -40,7 +40,7 @@ const SOCIAL_LINKS = [
   { icon: <FaInstagram size={22} />, label: 'Instagram', href: 'https://www.instagram.com/maarula.classes', color: '#e4405f' },
   { icon: <FaFacebook size={22} />, label: 'Facebook', href: 'https://www.facebook.com/classes.maarula', color: '#1877f2' },
   { icon: <FaYoutube size={22} />, label: 'YouTube', href: 'https://www.youtube.com/c/MAARULACLASSES', color: '#ff0000' },
-  { icon: <FaLinkedin size={22} />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/vivek33pal', color: '#0a66c2' },
+  { icon: <FaLinkedin size={22} />, label: 'LinkedIn', href: 'https://www.linkedin.com/company/maarulaclasses', color: '#0a66c2' },
 ];
 
 const ContactPage = () => {
@@ -98,6 +98,40 @@ const ContactPage = () => {
                 <span>{s.label}</span>
               </a>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Developer Information */}
+      <section className={styles.section} style={{ background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+        <div className={styles.container}>
+          <h2>Developer & Technical Support</h2>
+          <p className={styles.socialSub}>For platform issues, technical queries, or collaborations, reach out to the developer.</p>
+          <div className={styles.contactGrid} style={{ marginTop: '30px' }}>
+            <div className={styles.contactCard} style={{ '--card-accent': '#6366f1' }}>
+              <div className={styles.cardIcon}><ExternalLink size={24} /></div>
+              <h3>Portfolio</h3>
+              <p>vivekducs.is-a.dev</p>
+              <a href="https://vivekducs.is-a.dev/" target="_blank" rel="noopener noreferrer" className={styles.contactAction}>Visit Portfolio <ExternalLink size={14} /></a>
+            </div>
+            <div className={styles.contactCard} style={{ '--card-accent': '#ef4444' }}>
+              <div className={styles.cardIcon}><Mail size={24} /></div>
+              <h3>Email</h3>
+              <p>vivekducs@gmail.com</p>
+              <a href="mailto:vivekducs@gmail.com" className={styles.contactAction}>Send Email <ExternalLink size={14} /></a>
+            </div>
+            <div className={styles.contactCard} style={{ '--card-accent': '#14b8a6' }}>
+              <div className={styles.cardIcon}><Clock size={24} /></div>
+              <h3>Schedule a Meeting</h3>
+              <p>cal.com/vivekducs</p>
+              <a href="https://cal.com/vivekducs/" target="_blank" rel="noopener noreferrer" className={styles.contactAction}>Book a Call <ExternalLink size={14} /></a>
+            </div>
+            <div className={styles.contactCard} style={{ '--card-accent': '#0a66c2' }}>
+              <div className={styles.cardIcon}><FaLinkedin size={24} /></div>
+              <h3>LinkedIn</h3>
+              <p>in/vivekducs</p>
+              <a href="https://www.linkedin.com/in/vivekducs" target="_blank" rel="noopener noreferrer" className={styles.contactAction}>Connect <ExternalLink size={14} /></a>
+            </div>
           </div>
         </div>
       </section>

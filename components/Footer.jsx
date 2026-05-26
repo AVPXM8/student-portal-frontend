@@ -105,12 +105,21 @@ const Footer = () => {
         <p className={styles.developerCredit}>
           Designed & Developed with ❤️ by{' '}
           <a 
-            href="https://linkedin.com/in/vivek33pal" 
+            href="https://vivekducs.is-a.dev/" 
             target="_blank" 
             rel="noopener noreferrer" 
             className={styles.developerLink}
           >
-            Vivek kumar
+            Vivek Kumar
+          </a>
+          {' | '}
+          <a 
+            href="https://www.linkedin.com/in/vivekducs" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={styles.developerLink}
+          >
+            LinkedIn
           </a>
         </p>
       </div>
