@@ -164,15 +164,12 @@ const TestEnvironmentPage = () => {
     setIsTestSubmitted(true);
     setIsSidebarOpen(false);
 
-    // Track Test Submit
+    // Track Test Submit (scores tracked separately after results computed)
     gtag.event('test_submit', {
       exam_name: examName,
       total_questions: questions.length,
-      score: results?.score || 0,
-      correct: results?.correct || 0,
-      incorrect: results?.incorrect || 0
     });
-  }, [examName, questions.length, results]);
+  }, [examName, questions.length]);
 
   const handleExit = () => {
     setShowExitConfirm(true);
