@@ -884,32 +884,34 @@ const QuestionLibraryPage = ({ initialQuestions = [], initialTotalDocs = 0, init
         className={`${styles.filterSidebar} ${isFilterOpen ? styles.open : ''}`}
         aria-label="Filters"
       >
-        <button
-          className={styles.closeFilterButton}
-          onClick={() => {
-            setIsFilterOpen(false);
-            filterToggleBtnRef.current?.focus();
-          }}
-        >
-          <X size={24} /> Close Filters
-        </button>
+        <div className={styles.filterSidebarInner}>
+          <button
+            className={styles.closeFilterButton}
+            onClick={() => {
+              setIsFilterOpen(false);
+              filterToggleBtnRef.current?.focus();
+            }}
+          >
+            <X size={24} /> Close Filters
+          </button>
 
-        {/* Mobile filter form (staged) */}
-        <FilterFormContent
-          onSubmitSearch={onSubmitSearch}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          filterOptions={filterOptions}
-          pendingExam={pendingExam}
-          setPendingExam={setPendingExam}
-          pendingSubject={pendingSubject}
-          setPendingSubject={setPendingSubject}
-          pendingYear={pendingYear}
-          setPendingYear={setPendingYear}
-          applyFilters={applyFilters}
-          clearAllFilters={clearAllFilters}
-          filterLoading={filterLoading}
-        />
+          {/* Mobile filter form (staged) */}
+          <FilterFormContent
+            onSubmitSearch={onSubmitSearch}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            filterOptions={filterOptions}
+            pendingExam={pendingExam}
+            setPendingExam={setPendingExam}
+            pendingSubject={pendingSubject}
+            setPendingSubject={setPendingSubject}
+            pendingYear={pendingYear}
+            setPendingYear={setPendingYear}
+            applyFilters={applyFilters}
+            clearAllFilters={clearAllFilters}
+            filterLoading={filterLoading}
+          />
+        </div>
       </aside>
 
       {/* Main content */}

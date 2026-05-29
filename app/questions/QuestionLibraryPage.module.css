@@ -561,12 +561,22 @@
 .searchForm {
   display: flex;
   gap: 10px;
+  align-items: center;
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  color: #94a3b8;
+  pointer-events: none;
+  flex-shrink: 0;
 }
 
 .searchInput {
   flex: 1;
   border: 1px solid #e2e8f0;
-  padding: 12px 16px;
+  padding: 12px 16px 12px 44px;
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
@@ -585,6 +595,9 @@
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
+  height: 46px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .filterGroup h4 {
@@ -782,15 +795,23 @@
   background: #fff;
   z-index: 2000;
   transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 2rem;
-  box-shadow: -10px 0 30px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.1);
 }
 
 .filterSidebar.open {
   right: 0;
+}
+
+/* Inner scrollable content with header offset + safe-area padding */
+.filterSidebarInner {
+  padding: calc(64px + env(safe-area-inset-top, 0px) + 1.5rem) 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .overlay {
@@ -798,7 +819,7 @@
   inset: 0;
   background: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(4px);
-  z-index: 1000;
+  z-index: 1999;
 }
 
 .closeFilterButton {
@@ -810,8 +831,15 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   cursor: pointer;
+  color: #1e293b;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.closeFilterButton:hover {
+  background: #e2e8f0;
 }
 
 /* Skeleton Loading */
@@ -900,12 +928,16 @@
 }
 
 @media (max-width: 768px) {
-  .heroSection { padding: 4rem 1.5rem; }
+  .heroSection { padding: 4rem 1.5rem 3rem; }
   .benefitList { grid-template-columns: 1fr; }
   .topicCardGrid { grid-template-columns: repeat(1, 1fr); }
   .testBtnGroup { grid-template-columns: repeat(2, 1fr); }
   .paginationControls { flex-direction: column; padding: 20px; }
-  .container { margin: 2rem auto; }
+  .container { margin: 2rem auto; padding-bottom: calc(var(--bottom-nav-height, 68px) + 20px); }
   .topicSectionTitle { font-size: 2rem; }
   .examCardHeader { padding: 1.5rem; }
+  .scrollTopButton { bottom: calc(var(--bottom-nav-height, 68px) + 12px); right: 1rem; }
+  .listControlsContainer { padding: 16px; }
+  .listHeader { flex-wrap: wrap; gap: 10px; }
+  .filterToggleButton { width: 100%; justify-content: center; }
 }
