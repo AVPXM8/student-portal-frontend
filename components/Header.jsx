@@ -31,7 +31,8 @@ const Header = () => {
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+    <>
+      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       {/* Top Bar */}
       <div className={styles.topBar}>
         <div className={styles.topBarContent}>
@@ -111,6 +112,8 @@ const Header = () => {
         </div>
       </div>
 
+      </header>
+
       {/* Mobile Navigation */}
       <div className={`${styles.mobileMenuOverlay} ${isMobileMenuOpen ? styles.isOpen : ''}`}>
         <nav className={styles.mobileNav}>
@@ -137,7 +140,7 @@ const Header = () => {
           <Link href="/contact" className={pathname === '/contact' ? styles.active : ''} onClick={closeMobileMenu}>Contact Support</Link>
         </nav>
       </div>
-    </header>
+    </>
   );
 };
 

@@ -5,7 +5,7 @@
   position: sticky;
   top: 0; /* Sticky starts sticking immediately */
   left: 0;
-  z-index: 1000;
+  z-index: 2001;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -336,6 +336,7 @@
   }
   .logo {
     height: 38px;
+    width: auto;
   }
   .brandTitle {
     font-size: 1.1rem;
