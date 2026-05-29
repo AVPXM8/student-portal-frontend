@@ -329,7 +329,6 @@
     background: rgba(255,255,255,0.9); 
     backdrop-filter: blur(20px); 
     width: 100%;
-    overflow: hidden;
   }
   .mainHeader {
     height: 64px;

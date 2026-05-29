@@ -72,8 +72,10 @@
 
 @media (max-width: 768px) {
   .container {
-    bottom: 90px;
-    left: 15px;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    left: 12px;
   }
 
   .toggleButton {
