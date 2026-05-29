@@ -465,7 +465,7 @@ const TestEnvironmentPage = () => {
             </div>
           </div>
         </div>
-      ) : isTestSubmitted ? (
+      ) : (isTestSubmitted && !isReviewMode) ? (
         <div className={styles.resultsOverlay}>
           <div className={styles.resultsCard}>
             <Award className={styles.awardIcon} size={56} />
