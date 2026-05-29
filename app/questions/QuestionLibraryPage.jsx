@@ -13,7 +13,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Loader2,
-  ArrowUp,
   RefreshCw,
   AlertCircle
 } from 'lucide-react';
@@ -260,9 +259,6 @@ const QuestionLibraryPage = ({ initialQuestions = [], initialTotalDocs = 0, init
 
   // Go-to input (optional)
   const [jumpPage, setJumpPage] = useState('');
-
-  // Scroll-to-top visibility
-  const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Refs
   const questionListRef = useRef(null);
@@ -577,17 +573,6 @@ const QuestionLibraryPage = ({ initialQuestions = [], initialTotalDocs = 0, init
       },
     ],
   };
-
-  // Scroll-to-top listener
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY || window.pageYOffset;
-      setShowScrollTop(y > 400);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   // Retry fetch (for error state)
   const retryFetch = () => {
@@ -1151,17 +1136,6 @@ const QuestionLibraryPage = ({ initialQuestions = [], initialTotalDocs = 0, init
             </details>
           </section>
         </main>
-
-        {/* Scroll-to-top button */}
-        {showScrollTop && (
-          <button
-            className={styles.scrollTopButton}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            aria-label="Scroll to top"
-          >
-            <ArrowUp size={18} />
-          </button>
-        )}
       </div>
     </>
   );

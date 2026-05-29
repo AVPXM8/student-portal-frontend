@@ -14,7 +14,7 @@
     font-weight: 600;
     font-size: 1rem;
     box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
-    z-index: 1000;
+    z-index: 1100;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -323,9 +323,9 @@
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
+        bottom: var(--bottom-nav-height, 68px);
         width: 100%;
-        height: 100%;
+        height: auto;
         border-radius: 0;
         z-index: 9999;
     }
@@ -361,7 +361,8 @@
 
     .inputArea {
         padding: 10px 12px;
-        padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+        /* No extra safe-area-bottom needed since window already ends above BottomNav */
+        padding-bottom: 10px;
     }
 
     .inputArea input {
@@ -370,10 +371,11 @@
     }
 
     .launcher {
-        bottom: 20px;
+        bottom: calc(var(--bottom-nav-height, 68px) + 16px);
         right: 16px;
         padding: 10px 20px;
         font-size: 0.9rem;
+        z-index: 1100;
     }
 }
 
@@ -383,6 +385,11 @@
         width: 380px;
         height: 520px;
         right: 20px;
-        bottom: 90px;
+        bottom: calc(var(--bottom-nav-height, 68px) + 16px);
+    }
+    .launcher {
+        bottom: calc(var(--bottom-nav-height, 68px) + 12px);
+        right: 20px;
+        z-index: 1100;
     }
 }

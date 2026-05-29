@@ -389,10 +389,12 @@
 }
 
 @media (max-width: 768px) {
-  .pageLayout { margin-top: 20px; padding: 0 15px; }
-  .questionCard { padding: 25px; }
+  .pageLayout { margin-top: 20px; padding: 0 15px; padding-bottom: calc(var(--bottom-nav-height, 68px) + 20px); }
+  .questionCard { padding: 20px 16px; }
   .tipBar { display: none; }
   .optionsGrid { grid-template-columns: 1fr; }
   .buttonGroup { flex-direction: column; }
   .nextBtn { justify-content: center; }
+  .sidebar { display: none; }
+  .explanationBox { padding: 20px 16px; }
 }

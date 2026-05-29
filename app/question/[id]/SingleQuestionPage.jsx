@@ -169,8 +169,6 @@ export default function SingleQuestionPage() {
           {question.questionImageURL && (
             <img src={question.questionImageURL} alt="Question" className={styles.mainImage} />
           )}
-          
-          <AITutor questionId={question._id} question={question} />
 
           <h3 className={styles.optionsHeader}>Options:</h3>
           <div className={styles.optionsGrid}>
@@ -234,8 +232,9 @@ export default function SingleQuestionPage() {
             </div>
           </div>
         )}
+
+        <AITutor questionId={question._id} question={question} />
       </div>
-      <AITutor questionId={question._id} question={question} />
 
       <aside className={styles.sidebar}>
         {related.length > 0 && (
