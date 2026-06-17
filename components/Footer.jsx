@@ -55,6 +55,7 @@ const Footer = () => {
             <li><Link href="/">Home</Link></li>
             <li><Link href="/articles">Blog</Link></li>
             <li><Link href="/about">About</Link></li>
+            <li><Link href="/results">Results</Link></li>
             <li><Link href="/contact">Contact Us</Link></li>
             <li><a href="https://maarula.in/faculty" target="_blank" rel="noopener noreferrer">Faculty</a></li>
           </ul>

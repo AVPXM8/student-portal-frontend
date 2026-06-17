@@ -95,6 +95,7 @@ const Header = () => {
             <span className={`${styles.dropdownToggle} ${(pathname.startsWith('/resources') || pathname.startsWith('/results') || pathname.startsWith('/about')) ? styles.active : ''}`}>Resources <ChevronDown size={16} /></span>
             <div className={styles.dropdownMenu}>
               <Link href="/resources" className={styles.highlightLink}>PYQ PDF Downloads</Link>
+              <Link href="/results">Results</Link>
               <a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer">Our Courses</a>
               <a href="https://maarulaclasses.classx.co.in/test-series" target="_blank" rel="noopener noreferrer">Test Series</a>
               <Link href="/about">About Us</Link>
@@ -134,6 +135,7 @@ const Header = () => {
           
           <div className={styles.mobileSectionTitle}>Quick Links</div>
           <Link href="/articles" className={pathname.startsWith('/articles') ? styles.active : ''} onClick={closeMobileMenu}>Latest Updates</Link>
+          <Link href="/results" className={pathname.startsWith('/results') ? styles.active : ''} onClick={closeMobileMenu}>Results</Link>
           <Link href="/about" className={pathname.startsWith('/about') ? styles.active : ''} onClick={closeMobileMenu}>About Us</Link>
           <a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>Our Premium Courses</a>
           
