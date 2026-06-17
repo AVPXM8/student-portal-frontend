@@ -35,7 +35,7 @@ const ResultCard = ({ student, isPlacement }) => {
 };
 
 const ResultsPage = () => {
-  const [activeTab, setActiveTab] = useState('2025');
+  const [activeTab, setActiveTab] = useState('2026');
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredStudents = useMemo(() => {
@@ -54,6 +54,7 @@ const ResultsPage = () => {
   }, [activeTab, searchQuery]);
 
   const stats = useMemo(() => ({
+    '2026': students.filter(s => s.year === 2026).length,
     '2025': students.filter(s => s.year === 2025).length,
     '2024': students.filter(s => s.year === 2024).length,
     '2023': students.filter(s => s.year === 2023).length,
@@ -61,6 +62,7 @@ const ResultsPage = () => {
   }), []);
 
   const tabs = [
+    { id: '2026', label: '2026 Achievers', count: stats['2026'] },
     { id: '2025', label: '2025 Achievers', count: stats['2025'] },
     { id: '2024', label: '2024 Achievers', count: stats['2024'] },
     { id: '2023', label: '2023 Achievers', count: stats['2023'] },
