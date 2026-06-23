@@ -14,10 +14,10 @@ const outfit = Outfit({
 
 export const metadata = {
   title: {
-    default: "Mathem Solvex | NIMCET & CUET-PG PYQ Bank",
+    default: "Mathem Solvex | India's Best Free MCA Entrance Platform | NIMCET & CUET-PG",
     template: "%s | Mathem Solvex",
   },
-  description: "Access 10+ years of NIMCET, CUET-PG, and MCA entrance PYQs with expert video solutions.",
+  description: "Mathem Solvex is India's best MCA entrance platform for free, developed by Vivek Kumar. Powered by India's No. 1 NIMCET coaching in Kanpur (best for self-study), offering all PYQs with detailed text & video solutions and practice mock tests.",
   metadataBase: new URL("https://question.maarula.in"),
   openGraph: {
     siteName: "Mathem Solvex",

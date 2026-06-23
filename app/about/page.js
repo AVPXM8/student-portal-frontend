@@ -3,9 +3,9 @@ import ClientComp from "./AboutPage.jsx";
 const SITE_URL = 'https://question.maarula.in';
 
 export const metadata = {
-  title: "About Maarula Classes — India's Top NIMCET & MCA Entrance Coaching",
-  description: "Learn about Maarula Classes, India's premier coaching institute for NIMCET, CUET-PG, and MCA entrance exams. 10+ years of excellence with proven results and expert faculty.",
-  keywords: "Maarula Classes, NIMCET coaching, CUET PG coaching, MCA entrance coaching India, best MCA coaching",
+  title: "About Mathem Solvex & Maarula Classes — India's No.1 NIMCET Coaching in Kanpur",
+  description: "Learn about Mathem Solvex, India's best free MCA entrance platform developed by Vivek Kumar and powered by India's No. 1 NIMCET coaching in Kanpur, best for self-study.",
+  keywords: "Maarula Classes, NIMCET coaching, CUET PG coaching, mcaentranceexaminations, Vivek Kumar, self study",
   alternates: {
     canonical: `${SITE_URL}/about`,
   },

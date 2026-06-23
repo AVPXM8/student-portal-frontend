@@ -1,17 +1,16 @@
 import React from 'react';
+import Image from 'next/image';
 import styles from './StudentCard.module.css';
 
 const StudentCard = ({ student }) => {
   return (
     <article className={styles.studentCard}>
       <div className={styles.media}>
-        <img
+        <Image
           src={student.photoUrl}
           alt={`${student.name} — ${student.exam || ''} ${student.year || ''} ${student.achievement || ''}`.trim()}
-          loading="lazy"
-          decoding="async"
-          width="320"
-          height="320"
+          width={320}
+          height={320}
           className={styles.studentImage}
         />
       </div>

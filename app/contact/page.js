@@ -3,9 +3,9 @@ import ClientComp from "./ContactPage.jsx";
 const SITE_URL = 'https://question.maarula.in';
 
 export const metadata = {
-  title: "Contact Maarula Classes — NIMCET & MCA Entrance Coaching Support",
-  description: "Get in touch with Maarula Classes for queries about NIMCET, CUET-PG, and MCA entrance coaching. Call +91 99359 65550 or email contact@maarula.in for admissions, courses, and support.",
-  keywords: "contact Maarula Classes, NIMCET coaching enquiry, MCA entrance coaching support, Maarula Classes phone number",
+  title: "Contact Mathem Solvex & Maarula Classes — Kanpur support",
+  description: "Get in touch with Maarula Classes, India's No. 1 NIMCET coaching in Kanpur (best for self-study) for NIMCET, CUET-PG, and MCA entrance preparation queries.",
+  keywords: "contact Maarula Classes, NIMCET coaching Kanpur, mcaentranceexaminations, self study support",
   alternates: {
     canonical: `${SITE_URL}/contact`,
   },
