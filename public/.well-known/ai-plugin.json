@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Mathem Solvex",
+  "name_for_model": "mathem_solvex",
+  "description_for_human": "Search previous year questions (PYQs) and explanations with LaTeX math solutions for NIMCET and CUET PG exams.",
+  "description_for_model": "Help users search, filter, and practice solved previous year questions (PYQs) for NIMCET, CUET PG, and other MCA entrance exams. You can list public questions, fetch details of a specific question by its ID, explore filters (subject, topic, year), and search questions by keywords. When users ask for a step-by-step video solution or want to attempt live timed mock tests, link them to the relevant page on the Mathem Solvex website.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://question.maarula.in/openapi.json"
+  },
+  "logo_url": "https://res.cloudinary.com/dwmj6up6j/image/upload/v1752687380/rqtljy0wi1uzq3itqxoe.png",
+  "contact_email": "contact@maarula.in",
+  "legal_info_url": "https://question.maarula.in/about"
+}

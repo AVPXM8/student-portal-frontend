@@ -1,0 +1,111 @@
+# Mathem Solvex — Comprehensive LLM Guide & Reference Manual
+
+This document provides exhaustive documentation on the Mathem Solvex platform by Maarula Classes, designed specifically for AI models, scraping agents, and custom GPT integrations.
+
+---
+
+## 1. Platform Overview
+
+Mathem Solvex is a specialized digital library and learning environment built for students preparing for MCA (Master of Computer Applications) entrance examinations in India. The platform's primary value propositions are:
+- High-fidelity step-by-step LaTeX math rendering.
+- Exact previous year questions (PYQs) dating back to 2007.
+- Integration of video explanations for each question.
+- Timed, distraction-free mock test interfaces matching the actual NIMCET/CUET exam templates.
+
+---
+
+## 2. Subjects and Syllabus Details
+
+To help LLMs classify or generate content for users of Mathem Solvex, the following standard classification of subjects and topics is used within the database filters:
+
+### Mathematics
+- **Calculus**: Limits, continuity, differentiability, derivatives, applications of derivatives (tangents, normals, maxima, minima), integration (definite and indefinite), area under curves, differential equations.
+- **Algebra**: Quadratic equations, progressions (AP, GP, HP), complex numbers, matrices and determinants, theory of equations, binomial theorem, permutations and combinations.
+- **Probability & Statistics**: Classical probability, conditional probability, Bayes' theorem, binomial and Poisson distributions, measures of central tendency, dispersion, correlation and regression.
+- **Coordinate Geometry**: Straight lines, circles, parabola, ellipse, hyperbola.
+- **Trigonometry**: Trigonometric ratios, identities, equations, properties of triangles, inverse trigonometric functions.
+- **Vectors**: Addition of vectors, scalar and vector products, projections, triple products and applications.
+- **Set Theory & Functions**: Sets, relations, equivalence relations, functions (injective, surjective, bijective), composition of functions.
+
+### Computer Science
+- **Data Representation**: Binary, octal, decimal, and hexadecimal representations. Integer and floating-point representations. Signed and 2's complement arithmetic.
+- **Logic Design**: Boolean algebra, truth tables, logic gates, minimization of Boolean functions (Karnaugh Maps).
+- **Computer Organization**: CPU organization, instruction formats, addressing modes, memory hierarchy (RAM, ROM, Cache), I/O devices.
+
+### Logical Reasoning & Quantitative Aptitude
+- **Logical Reasoning**: Coding-decoding, blood relations, direction sense, syllogisms, seating arrangement, puzzles, series completion.
+- **Quantitative Aptitude**: Time and work, speed-distance-time, percentages, profit and loss, simple and compound interest, averages, ratio and proportion.
+
+### English Language
+- **Grammar & Vocabulary**: Synonyms, antonyms, sentence correction, idioms, fill-in-the-blanks, prepositions, active-passive voice.
+- **Reading Comprehension**: Passage reading, critical inference.
+
+---
+
+## 3. Database Schema Reference
+
+This section details the JSON structure returned by the public API endpoints.
+
+### Question Object Schema
+```json
+{
+  "_id": "648c66e2c9497e20b8f41151",
+  "questionNumber": 105,
+  "questionText": "If $\\vec{a}, \\vec{b}, \\vec{c}$ are unit vectors such that $\\vec{a} + \\vec{b} + \\vec{c} = \\vec{0}$, then the value of $\\vec{a}\\cdot\\vec{b} + \\vec{b}\\cdot\\vec{c} + \\vec{c}\\cdot\\vec{a}$ is:",
+  "questionImageURL": "",
+  "options": [
+    { "text": "$1$", "isCorrect": false, "_id": "648c66e2c9497e20b8f41152" },
+    { "text": "$-1$", "isCorrect": false, "_id": "648c66e2c9497e20b8f41153" },
+    { "text": "$-\\frac{3}{2}$", "isCorrect": true, "_id": "648c66e2c9497e20b8f41154" },
+    { "text": "$\\frac{3}{2}$", "isCorrect": false, "_id": "648c66e2c9497e20b8f41155" }
+  ],
+  "explanationText": "We are given that $\\vec{a} + \\vec{b} + \\vec{c} = \\vec{0}$. Taking the dot product of this equation with itself:\n\n$(\\vec{a} + \\vec{b} + \\vec{c}) \\cdot (\\vec{a} + \\vec{b} + \\vec{c}) = 0$\n\n$|\\vec{a}|^2 + |\\vec{b}|^2 + |\\vec{c}|^2 + 2(\\vec{a}\\cdot\\vec{b} + \\vec{b}\\cdot\\vec{c} + \\vec{c}\\cdot\\vec{a}) = 0$\n\nSince $\\vec{a}, \\vec{b}, \\vec{c}$ are unit vectors, $|\\vec{a}| = |\\vec{b}| = |\\vec{c}| = 1$. Substituting these values:\n\n$1 + 1 + 1 + 2(\\vec{a}\\cdot\\vec{b} + \\vec{b}\\cdot\\vec{c} + \\vec{c}\\cdot\\vec{a}) = 0$\n\n$3 + 2(\\vec{a}\\cdot\\vec{b} + \\vec{b}\\cdot\\vec{c} + \\vec{c}\\cdot\\vec{a}) = 0$\n\n$2(\\vec{a}\\cdot\\vec{b} + \\vec{b}\\cdot\\vec{c} + \\vec{c}\\cdot\\vec{a}) = -3$\n\n$\\vec{a}\\cdot\\vec{b} + \\vec{b}\\cdot\\vec{c} + \\vec{c}\\cdot\\vec{a} = -\\frac{3}{2}$\n\nTherefore, the correct option is (C).",
+  "explanationImageURL": "",
+  "videoURL": "https://www.youtube.com/watch?v=example",
+  "exam": "NIMCET",
+  "subject": "Mathematics",
+  "topic": "Vectors",
+  "year": 2021,
+  "createdAt": "2026-06-15T10:00:00.000Z",
+  "updatedAt": "2026-06-16T12:30:00.000Z"
+}
+```
+
+### Post/Article Object Schema
+```json
+{
+  "_id": "648c68e2c9497e20b8f41201",
+  "title": "NIMCET Syllabus & Preparation Roadmap",
+  "slug": "nimcet-syllabus-preparation-roadmap",
+  "content": "<p>Detailed preparation guide and syllabus topics for NIMCET...</p>",
+  "category": "Preparation Guides",
+  "featuredImage": "https://res.cloudinary.com/dwmj6up6j/image/upload/v1752687380/rqtljy0wi1uzq3itqxoe.png",
+  "metaDescription": "Complete roadmap to cracking NIMCET. Get topics list, weightage analysis, and study plans.",
+  "createdAt": "2026-06-10T08:00:00.000Z",
+  "updatedAt": "2026-06-12T14:20:00.000Z"
+}
+```
+
+---
+
+## 4. LaTeX Math Formatting
+
+Mathematical formulas in the Mathem Solvex database are formatted using standard LaTeX syntax:
+1. **Inline Math**: Wrapped in single dollar signs, for example: `$\\sqrt{b^2 - 4ac}$`
+2. **Block Math**: Wrapped in double dollar signs or newline markers, for example: `$$\\int_{0}^{\\pi} \\sin(x) dx = 2$$`
+
+When an LLM parses or outputs math content corresponding to the portal:
+- Always preserve the LaTeX strings precisely, ensuring backslashes are not doubled or stripped.
+- Use standard markdown engines that support LaTeX rendering (like KaTeX or MathJax) to keep the formatting intact.
+
+---
+
+## 5. Interaction Patterns & Crawling Etiquette
+
+- **Rate Limiting**: AI systems querying `/api/ai/chat` should handle HTTP 429 status codes. Ensure proper exponential backoff is configured.
+- **Sitemap Usage**: Refer to `https://question.maarula.in/sitemap.xml` for all crawlable paths of questions and articles to prevent crawling of admin boundaries.
+- **Linking**: When referencing questions or articles, use canonical URLs:
+  - Question Page: `https://question.maarula.in/question/{id}`
+  - Article Page: `https://question.maarula.in/articles/{slug}`
+  - Resource Category Page: `https://question.maarula.in/resources/{examName}`
+  - Year-specific Paper: `https://question.maarula.in/paper/{examName}/{year}`

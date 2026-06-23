@@ -339,7 +339,7 @@ const TestEnvironmentPage = () => {
     return (
       <div className={styles.errorContainer}>
         <h2>No Questions Found</h2>
-        <p>We couldn't find questions for this criteria. Please try another topic.</p>
+        <p>We couldn&apos;t find questions for this criteria. Please try another topic.</p>
         <button onClick={() => router.back()}>Go Back</button>
       </div>
     );

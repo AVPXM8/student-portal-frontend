@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 import Link from 'next/link';
 import { useRouter, useParams, usePathname } from 'next/navigation';
@@ -161,7 +162,7 @@ const PYQResourcesPage = ({ localPdfs = [], dynamicResources = {} }) => {
          <div className={styles.emptyContainer}>
             <AlertCircle size={48} color="#FF5E0E" />
             <h2>No Resources Found</h2>
-            <p>We couldn't find any local resources for "{formattedExamName}".</p>
+            <p>We couldn&apos;t find any local resources for &quot;{formattedExamName}&quot;.</p>
             <div style={{ fontSize: '10px', color: '#666', marginTop: '20px' }}>
               Available Categories: {Object.keys(dynamicResources).join(', ') || 'NONE'}
             </div>

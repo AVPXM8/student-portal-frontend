@@ -163,7 +163,7 @@ export default function HomeClient() {
       <section className={styles.introSection}>
         <RevealSection className={styles.introContent}>
           <h2 className={styles.mainTitle}>
-            India’s Premier NIMCET & MCA Entrance Coaching
+            India&rsquo;s Premier NIMCET & MCA Entrance Coaching
           </h2>
           <p className={styles.introText}>
             For over a decade, <strong>Maarula Classes</strong> has been the standard-bearer 

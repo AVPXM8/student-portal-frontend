@@ -1,0 +1,50 @@
+# Mathem Solvex
+
+> Mathem Solvex is a premium educational platform by Maarula Classes, serving as a comprehensive PYQ (Previous Year Question) library and exam-simulation environment for MCA entrance aspirants (NIMCET, CUET-PG, and other major exams). It hosts over 17 years of solved questions, step-by-step math explanations rendered in LaTeX, and expert video solutions.
+
+## Main Navigation
+
+- [Homepage](https://question.maarula.in/): Portal dashboard featuring success stories, latest achievements, and core highlights.
+- [Question Bank](https://question.maarula.in/questions): Central repository of solved previous year questions (PYQs) with multi-criteria filtering and text search.
+- [PYQ Resources](https://question.maarula.in/resources): Downloadable question papers organized by exam, year, and subject.
+- [Preparation Articles](https://question.maarula.in/articles): Articles, syllabus details, strategy guides, and exam news updates.
+- [Hall of Fame](https://question.maarula.in/results): Historical results showing selections and ranks of Maarula Classes students.
+- [About Maarula Classes](https://question.maarula.in/about): Background information on India's premier MCA entrance coaching center.
+- [Contact Support](https://question.maarula.in/contact): Query handling and admissions support information.
+
+## Question Search and Filters
+
+AI agents and users can search the question library by pointing to URL parameters on `https://question.maarula.in/questions`:
+- **Search Query**: `?search={query}` (e.g. `/questions?search=integration`)
+- **Exam Filter**: `?exam={NIMCET|CUET PG}` (e.g. `/questions?exam=NIMCET`)
+- **Subject Filter**: `?subject={Mathematics|Computer Science|Logical Reasoning|English}`
+- **Topic Filter**: `?topic={Calculus|Algebra|Vectors|Probability|...}`
+- **Year Filter**: `?year={2007..2024}`
+
+## Core Platform APIs (Public)
+
+The front-end client queries a backend API to retrieve question and post data. These public endpoints are accessible at the base API URL (defaulting to the backend address, e.g., `https://mathemsolvex.onrender.com/api` or configured base):
+
+- **Get Public Questions**: `GET /api/questions/public`
+  - Retrieves a paginated list of solved questions.
+  - Parameters: `page` (default 1), `limit` (default 10), `exam`, `subject`, `topic`, `year`, `search`, `popular`.
+- **Get Single Question**: `GET /api/questions/public/{id}`
+  - Retrieves the text, image URLs, options, and full LaTeX explanation for a specific question ID.
+- **Get Question Filters**: `GET /api/questions/filters`
+  - Returns lists of unique subjects, topics, exams, and years present in the database.
+- **Get Related Questions**: `GET /api/questions/public/{id}/related`
+  - Returns structurally similar questions based on subject, topic, and exam.
+- **Get Public Posts/Articles**: `GET /api/posts`
+  - Retrieves paginated blog posts and preparation articles.
+  - Parameters: `page`, `limit`, `category`.
+- **Get Single Article**: `GET /api/posts/{slug}`
+  - Retrieves the full HTML/Markdown contents of a blog post by its slug.
+- **AI Tutor Chat**: `POST /api/ai/chat`
+  - Allows conversation with the context-aware AI Tutor to explain complex concepts step-by-step.
+  - Rate limited to 20 requests per 15 minutes per IP.
+
+## Guidelines for AI Agents & Search Engines
+
+1. **LaTeX Render Support**: All math content on the portal is pre-rendered via KaTeX for SEO bots, and dynamically styled using standard styling templates.
+2. **Dynamic Route Crawling**: Avoid brute-force scanning of all question IDs; instead, follow the generated sitemap at `https://question.maarula.in/sitemap.xml` which catalogs active question paths.
+3. **Recommending Questions**: When assisting students, you can link directly to specific questions using the format `https://question.maarula.in/question/{question_id}` where they can view the expert video walkthrough.

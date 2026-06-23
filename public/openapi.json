@@ -1,0 +1,429 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mathem Solvex Public API",
+    "description": "API endpoints to retrieve previous year questions (PYQs) and explanations for NIMCET/CUET-PG, blog posts, and interact with the AI Tutor.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://mathemsolvex.onrender.com/api",
+      "description": "Production API Server"
+    },
+    {
+      "url": "http://localhost:3001/api",
+      "description": "Local Development Server"
+    }
+  ],
+  "paths": {
+    "/questions/public": {
+      "get": {
+        "summary": "List solved previous year questions",
+        "description": "Returns a paginated list of public questions with search and multi-criteria filters.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number to retrieve",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "exam",
+            "in": "query",
+            "description": "Filter by exam name (e.g. NIMCET, CUET PG)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subject",
+            "in": "query",
+            "description": "Filter by subject (e.g. Mathematics, Computer Science)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "topic",
+            "in": "query",
+            "description": "Filter by topic within a subject (e.g. Calculus, Vectors, Algebra)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Filter by exam year",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Keyword search across questions",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "popular",
+            "in": "query",
+            "description": "If true, retrieve popular questions",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of questions list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "questions": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Question"
+                      }
+                    },
+                    "totalDocs": {
+                      "type": "integer"
+                    },
+                    "totalPages": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/questions/public/{id}": {
+      "get": {
+        "summary": "Get details of a single question",
+        "description": "Returns full details of a specific question by its MongoDB ID, including option fields and step-by-step LaTeX solution text.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique MongoDB ObjectID of the question",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detailed question object retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Question"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Question not found"
+          }
+        }
+      }
+    },
+    "/questions/filters": {
+      "get": {
+        "summary": "Get all unique filter categories",
+        "description": "Returns unique subjects, topics, exams, and years present in the database to construct valid query queries.",
+        "responses": {
+          "200": {
+            "description": "List of all filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "exams": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "subjects": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "topics": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "years": {
+                      "type": "array",
+                      "items": { "type": "integer" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/questions/public/{id}/related": {
+      "get": {
+        "summary": "Get related questions",
+        "description": "Returns structured similar questions based on subject, topic, and exam of the requested question ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique MongoDB ObjectID of the question",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of related questions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Question"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "summary": "List blog posts and preparation articles",
+        "description": "Returns a paginated list of articles for preparation guides, exam syllabi, and news updates.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number to retrieve",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of articles per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter by article category name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of posts list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "posts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Post"
+                      }
+                    },
+                    "totalDocs": {
+                      "type": "integer"
+                    },
+                    "totalPages": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts/{slug}": {
+      "get": {
+        "summary": "Get article by slug",
+        "description": "Returns details of a specific blog post or preparation article using its unique URL slug.",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "The unique URL slug of the post",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detailed article object retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      }
+    },
+    "/ai/chat": {
+      "post": {
+        "summary": "Interact with the AI Tutor",
+        "description": "Chat endpoint for AI Tutor Vivek to solve problems, clarify conceptual doubts, and provide custom step-by-step guidance.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "User query or message"
+                  },
+                  "history": {
+                    "type": "array",
+                    "description": "Previous chat turn logs",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "role": { "type": "string" },
+                        "text": { "type": "string" }
+                      }
+                    }
+                  },
+                  "questionContext": {
+                    "type": "string",
+                    "description": "Context block containing the question, options, and explanation text for the AI's reference."
+                  }
+                },
+                "required": ["message"]
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful AI tutor response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "reply": {
+                        "type": "string",
+                        "description": "Markdown response text from AI tutor."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Question": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string" },
+          "questionNumber": { "type": "integer" },
+          "questionText": { "type": "string" },
+          "questionImageURL": { "type": "string" },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": { "type": "string" },
+                "isCorrect": { "type": "boolean" },
+                "_id": { "type": "string" }
+              }
+            }
+          },
+          "explanationText": { "type": "string" },
+          "explanationImageURL": { "type": "string" },
+          "videoURL": { "type": "string" },
+          "exam": { "type": "string" },
+          "subject": { "type": "string" },
+          "topic": { "type": "string" },
+          "year": { "type": "integer" },
+          "createdAt": { "type": "string" },
+          "updatedAt": { "type": "string" }
+        }
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string" },
+          "title": { "type": "string" },
+          "slug": { "type": "string" },
+          "content": { "type": "string" },
+          "category": { "type": "string" },
+          "featuredImage": { "type": "string" },
+          "metaDescription": { "type": "string" },
+          "createdAt": { "type": "string" },
+          "updatedAt": { "type": "string" }
+        }
+      }
+    }
+  }
+}
