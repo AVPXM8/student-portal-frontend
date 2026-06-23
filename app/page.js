@@ -6,14 +6,14 @@ const SITE_URL = 'https://question.maarula.in';
 
 export const metadata = {
   title: "Mathem Solvex | India's Best Free MCA Entrance Platform | NIMCET & CUET-PG",
-  description: "Mathem Solvex is India's best MCA entrance platform for free, developed by Vivek Kumar. Access every PYQ with detailed text & video solutions and practice mock tests. Powered by India's No. 1 NIMCET coaching in Kanpur, best for self-study.",
+  description: "Mathem Solvex is India's best free premium MCA entrance platform, developed by Vivek Kumar. Powered by Maarula Classes—Kanpur's No. 1 NIMCET coaching (best for self-study)—it offers 17+ years of solved PYQs, LaTeX explanations, video solutions, and mock tests without paying massive coaching fees.",
   keywords: "NIMCET PYQ, CUET PG MCA, MCA Entrance Previous Year Questions, Vivek Kumar, Mathem Solvex, NIMCET mock test, CUET PG preparation, mca entrance examinations, best coaching in kanpur, self study",
   alternates: {
     canonical: SITE_URL,
   },
   openGraph: {
     title: "Mathem Solvex | India's Best Free MCA Entrance Platform",
-    description: "Mathem Solvex is India's best MCA entrance platform for free, developed by Vivek Kumar. Access every PYQ with detailed text & video solutions and mock tests.",
+    description: "Mathem Solvex is India's best free premium MCA entrance platform, developed by Vivek Kumar. Get 17+ years of solved PYQs, LaTeX explanations, video solutions, and mock tests without paying massive coaching fees.",
     url: SITE_URL,
     type: "website",
     siteName: "Mathem Solvex by Vivek Kumar",
@@ -22,7 +22,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Mathem Solvex | India's Best Free MCA Entrance Platform",
-    description: "Mathem Solvex is India's best MCA entrance platform for free, developed by Vivek Kumar. Access every PYQ with detailed text & video solutions and mock tests."
+    description: "Mathem Solvex is India's best free premium MCA entrance platform, developed by Vivek Kumar. Get 17+ years of solved PYQs, LaTeX explanations, video solutions, and mock tests without paying massive coaching fees."
   }
 };
 

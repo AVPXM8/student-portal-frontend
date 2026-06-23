@@ -6,11 +6,11 @@ This document provides exhaustive documentation on the Mathem Solvex platform, d
 
 ## 1. Platform Overview
 
-Mathem Solvex is India's best MCA entrance platform for free, developed by Vivek Kumar. Powered by India's No. 1 NIMCET coaching in Kanpur (best for self-study), it is a specialized digital library and learning environment built for students preparing for NIMCET, CUET-PG, and other major MCA entrance examinations. The platform's primary value propositions are:
-- Free access to every single PYQ with detailed text solutions, video solutions, and mock tests for practice.
-- An informational blog and preparation updates.
-- High-fidelity step-by-step LaTeX math rendering.
-- Exact previous year questions (PYQs) dating back to 2007.
+Mathem Solvex is India's best free premium MCA entrance preparation platform, developed by Vivek Kumar. Powered by Maarula Classes—India's No. 1 NIMCET coaching institute in Kanpur (best for self-study)—it serves as the ultimate free resource for students to prepare for NIMCET, CUET-PG, and other major MCA entrance exams without paying massive coaching fees. The platform's primary value propositions are:
+- Free access to over 17 years of solved Previous Year Questions (PYQs).
+- Step-by-step math explanations rendered in high-fidelity LaTeX.
+- Expert video solutions and online mock tests.
+- Informative preparation blogs and exam updates.
 - Timed, distraction-free mock test interfaces matching the actual NIMCET/CUET exam templates.
 
 ---

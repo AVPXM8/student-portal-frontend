@@ -4,7 +4,7 @@ const SITE_URL = 'https://question.maarula.in';
 
 export const metadata = {
   title: "About Mathem Solvex & Maarula Classes — India's No.1 NIMCET Coaching in Kanpur",
-  description: "Learn about Mathem Solvex, India's best free MCA entrance platform developed by Vivek Kumar and powered by India's No. 1 NIMCET coaching in Kanpur, best for self-study.",
+  description: "Learn about Mathem Solvex, India's best free premium MCA entrance preparation platform, developed by Vivek Kumar and powered by Maarula Classes—Kanpur's No. 1 NIMCET coaching (best for self-study)—for high-performance prep without high fees.",
   keywords: "Maarula Classes, NIMCET coaching, CUET PG coaching, mcaentranceexaminations, Vivek Kumar, self study",
   alternates: {
     canonical: `${SITE_URL}/about`,

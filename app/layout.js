@@ -17,7 +17,7 @@ export const metadata = {
     default: "Mathem Solvex | India's Best Free MCA Entrance Platform | NIMCET & CUET-PG",
     template: "%s | Mathem Solvex",
   },
-  description: "Mathem Solvex is India's best MCA entrance platform for free, developed by Vivek Kumar. Powered by India's No. 1 NIMCET coaching in Kanpur (best for self-study), offering all PYQs with detailed text & video solutions and practice mock tests.",
+  description: "Mathem Solvex is India's best free premium MCA entrance preparation platform, developed by Vivek Kumar. Powered by Maarula Classes—Kanpur's No. 1 NIMCET coaching (best for self-study)—it provides 17+ years of solved PYQs, step-by-step LaTeX explanations, video solutions, and mock tests without paying massive coaching fees.",
   metadataBase: new URL("https://question.maarula.in"),
   openGraph: {
     siteName: "Mathem Solvex",

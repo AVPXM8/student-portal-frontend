@@ -4,7 +4,7 @@ const SITE_URL = 'https://question.maarula.in';
 
 export const metadata = {
   title: "Contact Mathem Solvex & Maarula Classes — Kanpur support",
-  description: "Get in touch with Maarula Classes, India's No. 1 NIMCET coaching in Kanpur (best for self-study) for NIMCET, CUET-PG, and MCA entrance preparation queries.",
+  description: "Get in touch with Maarula Classes, Kanpur's No. 1 NIMCET coaching institute (best for self-study) supporting free MCA entrance prep on Mathem Solvex.",
   keywords: "contact Maarula Classes, NIMCET coaching Kanpur, mcaentranceexaminations, self study support",
   alternates: {
     canonical: `${SITE_URL}/contact`,
