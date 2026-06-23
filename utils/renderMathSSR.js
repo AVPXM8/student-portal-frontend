@@ -78,6 +78,8 @@ export function renderMathSSR(html = '') {
  */
 export function toPlainTextSSR(s = '') {
   return s
+    .replace(/<\/(td|th|tr|p|div|h[1-6]|li)>/gi, ' ')
+    .replace(/<br\s*\/?>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/\$\$[\s\S]*?\$\$/g, ' ')
     .replace(/\$[^\n$]+?\$/g, ' ')

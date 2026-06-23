@@ -10,9 +10,16 @@ import styles from "./ArticleListPage.module.css";
 
 // Safe excerpt builder (client-side)
 const toPlainText = (html = '') => {
-  if (typeof document === 'undefined') return html.replace(/<[^>]+>/g, ' ');
+  // Add spaces after block-level tags so textContent doesn't squash text together
+  const spacedHtml = html
+    .replace(/<\/(td|th|tr|p|div|h[1-6]|li)>/gi, ' ')
+    .replace(/<br\s*\/?>/gi, ' ');
+
+  if (typeof document === 'undefined') {
+    return spacedHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  }
   const el = document.createElement('div');
-  el.innerHTML = html;
+  el.innerHTML = spacedHtml;
   const text = el.textContent || el.innerText || '';
   return text.replace(/\s+/g, ' ').trim();
 };

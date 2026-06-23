@@ -14,7 +14,7 @@
   --brand: #F97316;
   --brand-dark: #EA580C;
   --brand-soft: #FFEDD5;
-  --brand-glow: rgba(249,115,22,0.12);
+  --brand-glow: rgba(249, 115, 22, 0.12);
 }
 
 /* ──────── Base ──────── */
@@ -55,7 +55,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 16px;
-  box-shadow: 0 4px 12px rgba(249,115,22,0.2);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
 }
 
 .title {
@@ -94,7 +94,7 @@
   height: auto;
   display: block;
   border-radius: 20px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 }
 
 .heroFigure figcaption {
@@ -166,7 +166,7 @@
 .postContent a {
   color: var(--brand-dark);
   text-decoration: none;
-  border-bottom: 1.5px solid rgba(234,88,12,0.25);
+  border-bottom: 1.5px solid rgba(234, 88, 12, 0.25);
   transition: border-color 0.2s;
 }
 
@@ -247,7 +247,7 @@
   height: auto;
   display: block;
   border-radius: 14px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .figcaption {
@@ -259,45 +259,57 @@
 }
 
 /* ──────── Tables ──────── */
+.postContent .tableWrapper,
 .tableWrap {
   width: 100%;
-  margin: 1.2rem 0;
-  overflow: auto;
+  margin: 1.5rem 0;
+  overflow-x: auto;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 12px;
   -webkit-overflow-scrolling: touch;
+  background: #fff;
 }
 
-.tableWrap table {
+.postContent table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
+  min-width: 400px;
 }
 
-.tableWrap th {
+.postContent th,
+.postContent td {
   padding: 12px 16px;
-  text-align: left;
-  background: var(--soft);
-  color: var(--ink-700);
-  font-weight: 700;
-  font-size: 0.88rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  border-bottom: 2px solid var(--line);
-}
-
-.tableWrap td {
-  padding: 11px 16px;
   text-align: left;
   vertical-align: top;
   border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
 }
 
-.tableWrap tr:last-child td {
+.postContent th:last-child,
+.postContent td:last-child {
+  border-right: none;
+}
+
+.postContent th {
+  background-color: var(--soft);
+  font-weight: 700;
+  color: var(--ink-900);
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.postContent tr:last-child td {
   border-bottom: none;
 }
 
-.tableWrap tr:nth-child(even) {
+.postContent tr:nth-child(even) {
   background: #fafbfc;
+}
+
+.postContent table p {
+  margin: 0;
 }
 
 /* ──────── Embeds ──────── */
@@ -309,10 +321,10 @@
   border-radius: 14px;
   overflow: hidden;
   background: #000;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-.embed > iframe {
+.embed>iframe {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -339,7 +351,7 @@
   overflow: hidden;
   border: 1px solid var(--line);
   background: #000;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 /* ──────── Share bar ──────── */
@@ -377,19 +389,48 @@
 
 .social:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
 }
 
-.whatsapp { background: #25D366; }
-.whatsapp:hover { background: #1fb358; }
-.telegram { background: #229ED9; }
-.telegram:hover { background: #1b86b8; }
-.facebook { background: #1877F2; }
-.facebook:hover { background: #145fcc; }
-.twitter { background: #0F1419; }
-.twitter:hover { background: #000; }
-.linkedin { background: #0A66C2; }
-.linkedin:hover { background: #084f99; }
+.whatsapp {
+  background: #25D366;
+}
+
+.whatsapp:hover {
+  background: #1fb358;
+}
+
+.telegram {
+  background: #229ED9;
+}
+
+.telegram:hover {
+  background: #1b86b8;
+}
+
+.facebook {
+  background: #1877F2;
+}
+
+.facebook:hover {
+  background: #145fcc;
+}
+
+.twitter {
+  background: #0F1419;
+}
+
+.twitter:hover {
+  background: #000;
+}
+
+.linkedin {
+  background: #0A66C2;
+}
+
+.linkedin:hover {
+  background: #084f99;
+}
 
 .copy {
   background: var(--ink-800);
@@ -552,14 +593,14 @@
   color: var(--ink-900);
   background: #fff;
   border: 1px solid var(--line);
-  transition: all 0.2s cubic-bezier(.4,0,.2,1);
+  transition: all 0.2s cubic-bezier(.4, 0, .2, 1);
 }
 
 .recentItem:hover {
   background: var(--brand-soft);
   border-color: var(--brand);
   transform: translateX(3px);
-  box-shadow: 0 4px 12px rgba(249,115,22,0.08);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.08);
 }
 
 .recentTitle {
@@ -633,7 +674,7 @@
 
 .relatedCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
   border-color: var(--brand);
 }
 
@@ -663,6 +704,7 @@
 
 /* ──────── Responsive ──────── */
 @media (max-width: 640px) {
+
   /* ... existing mobile styles ... */
   .relatedGrid {
     grid-template-columns: 1fr;

@@ -54,7 +54,7 @@ export default async function Page({ params, searchParams }) {
   let totalPages = 1;
 
   try {
-    const res = await fetch(`${API_BASE}/api/posts?page=${page}&limit=${POSTS_PER_PAGE}`, { next: { revalidate: 3600 } });
+    const res = await fetch(`${API_BASE}/api/posts?page=${page}&limit=${POSTS_PER_PAGE}`, { next: { revalidate: 60 } });
     const data = await res.json();
     posts = Array.isArray(data.posts) ? data.posts : (Array.isArray(data) ? data : []);
     totalPosts = data.total || 0;

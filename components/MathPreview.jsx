@@ -31,7 +31,7 @@ const MathPreview = ({ latexString = '', className = '', style = {} }) => {
   return (
     <div
       className={className}
-      style={style}
+      style={{ whiteSpace: 'pre-wrap', ...style }}
       dangerouslySetInnerHTML={{ __html: htmlContent }}
     />
   );

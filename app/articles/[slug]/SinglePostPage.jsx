@@ -443,19 +443,19 @@ export default function SinglePostPage({ initialPost, initialRecentPosts, initia
             <ul className={styles.recentList}>
               <li>
                 <Link href="/questions" className={styles.recentItem}>
-                  <span className={styles.recentTitle}>📚 Question Bank — 17 Years PYQs</span>
+                  <span className={styles.recentTitle}>Question Bank — 17 Years PYQs</span>
                   <span className={styles.recentDate}>NIMCET, CUET PG & More</span>
                 </Link>
               </li>
               <li>
                 <Link href="/questions?exam=NIMCET" className={styles.recentItem}>
-                  <span className={styles.recentTitle}>🎯 NIMCET Previous Year Questions</span>
+                  <span className={styles.recentTitle}>NIMCET Previous Year Questions</span>
                   <span className={styles.recentDate}>Practice with solutions</span>
                 </Link>
               </li>
               <li>
                 <Link href="/questions?exam=CUET PG" className={styles.recentItem}>
-                  <span className={styles.recentTitle}>📝 CUET PG Practice Questions</span>
+                  <span className={styles.recentTitle}>CUET PG Practice Questions</span>
                   <span className={styles.recentDate}>Topic-wise preparation</span>
                 </Link>
               </li>

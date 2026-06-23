@@ -5,14 +5,21 @@ const SITE_URL = 'https://question.maarula.in';
 const SITE_LOGO = "https://res.cloudinary.com/dwmj6up6j/image/upload/v1752687380/rqtljy0wi1uzq3itqxoe.png";
 
 function stripHtml(s = '') {
-  return s.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/\s+/g, ' ').trim();
+  return s
+    .replace(/<\/(td|th|tr|p|div|h[1-6]|li)>/gi, ' ')
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
 
   try {
-    const res = await fetch(`${API_BASE}/api/posts/${slug}`, { next: { revalidate: 3600 } });
+    const res = await fetch(`${API_BASE}/api/posts/${slug}`, { next: { revalidate: 60 } });
     const post = await res.json();
 
     if (!post || !post.title) return { title: "Article Not Found" };
@@ -62,13 +69,13 @@ export default async function Page({ params, searchParams }) {
   let breadcrumbLd = null;
 
   try {
-    const postRes = await fetch(`${API_BASE}/api/posts/${resolvedParams.slug}`, { next: { revalidate: 3600 } });
+    const postRes = await fetch(`${API_BASE}/api/posts/${resolvedParams.slug}`, { next: { revalidate: 60 } });
     post = await postRes.json();
 
     if (post && post.title) {
       const [recentRes, relatedRes] = await Promise.all([
-        fetch(`${API_BASE}/api/posts?limit=6`, { next: { revalidate: 3600 } }),
-        post.category ? fetch(`${API_BASE}/api/posts?category=${encodeURIComponent(post.category)}&limit=6`, { next: { revalidate: 3600 } }) : Promise.resolve({ json: () => ({ posts: [] }) })
+        fetch(`${API_BASE}/api/posts?limit=6`, { next: { revalidate: 60 } }),
+        post.category ? fetch(`${API_BASE}/api/posts?category=${encodeURIComponent(post.category)}&limit=6`, { next: { revalidate: 60 } }) : Promise.resolve({ json: () => ({ posts: [] }) })
       ]);
 
       const recentData = await recentRes.json();
