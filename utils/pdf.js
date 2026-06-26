@@ -44,6 +44,8 @@ export async function getDynamicResources() {
     else if (upperName.includes('AMU')) category = 'AMU';
     else if (upperName.includes('WB-JECA') || upperName.includes('JECA')) category = 'WB-JECA';
     else if (upperName.includes('VITMEE')) category = 'VITMEE';
+    else if (upperName.includes('IGDTUW')) category = 'IGDTUW';
+    else if (upperName.includes('TU MCA') || upperName.includes('TU-MCA')) category = 'TU MCA';
 
     if (!data[category]) {
       data[category] = { yearwise: [], topicwise: [] };
