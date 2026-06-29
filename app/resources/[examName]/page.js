@@ -10,13 +10,19 @@ export const dynamicParams = true; // allow on-demand generation for new dynamic
 export async function generateStaticParams() {
   const dynamicResources = await getDynamicResources();
   return Object.keys(dynamicResources).map((examName) => ({
-    examName: encodeURIComponent(examName),
+    examName: examName,
   }));
 }
 
 export async function generateMetadata({ params }) {
   const { examName } = await params;
-  const decoded = decodeURIComponent(examName);
+  let decoded = examName || "";
+  try {
+    decoded = decodeURIComponent(decoded);
+    if (decoded.includes('%')) {
+      decoded = decodeURIComponent(decoded);
+    }
+  } catch(e) {}
   const dynamicResources = await getDynamicResources();
   
   // Robust case-insensitive lookup
@@ -62,7 +68,13 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const resolvedParams = await params;
-  const decoded = decodeURIComponent(resolvedParams.examName || '');
+  let decoded = resolvedParams.examName || '';
+  try {
+    decoded = decodeURIComponent(decoded);
+    if (decoded.includes('%')) {
+      decoded = decodeURIComponent(decoded);
+    }
+  } catch(e) {}
 
   // Fetch dynamic resources to pass to ClientComp
   const dynamicResources = await getDynamicResources();

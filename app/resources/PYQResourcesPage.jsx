@@ -43,8 +43,16 @@ const PYQResourcesPage = ({ localPdfs = [], dynamicResources = {} }) => {
     }
   }, []);
 
-  // Extremely direct exam lookup logic
-  const decodedExamName = decodeURIComponent(examName || "");
+  // Extremely direct exam lookup logic, robust against double-encoding
+  let decodedExamName = examName || "";
+  try {
+    decodedExamName = decodeURIComponent(decodedExamName);
+    if (decodedExamName.includes('%')) {
+      decodedExamName = decodeURIComponent(decodedExamName);
+    }
+  } catch (e) {
+    console.error('Failed to decode examName', e);
+  }
   const keys = Object.keys(dynamicResources);
   const matchedKey = keys.find(key => {
     const k = key.toUpperCase().trim();
