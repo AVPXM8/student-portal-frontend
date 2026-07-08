@@ -63,6 +63,19 @@ export default function RootLayout({ children }) {
             });
           `}
         </Script>
+        <Script id="register-sw" strategy="lazyOnload">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(reg) {
+                  console.log('Service Worker registered successfully with scope: ', reg.scope);
+                }).catch(function(err) {
+                  console.error('Service Worker registration failed: ', err);
+                });
+              });
+            }
+          `}
+        </Script>
       </head>
       {/* HYDRATION: Re-added suppressHydrationWarning to body to prevent browser extension mismatches */}
       <body suppressHydrationWarning>
