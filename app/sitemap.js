@@ -3,6 +3,8 @@ import { getDynamicResources } from "@/utils/pdf";
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
 const SITE_URL = 'https://question.maarula.in';
 
+export const revalidate = 86400; // 24 hours ISR sitemap cache
+
 export default async function sitemap() {
   const dynamicResources = await getDynamicResources();
   // Static pages
@@ -21,14 +23,14 @@ export default async function sitemap() {
 
   try {
     const res = await fetch(`${API_BASE}/api/sitemap-urls`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 86400 },
     });
     if (res.ok) {
       const data = await res.json();
 
-      // Question pages
+      // Question pages (limit to top 1000 latest/popular to save crawl budget)
       if (data.questions?.length) {
-        questionRoutes = data.questions.map((q) => ({
+        questionRoutes = data.questions.slice(0, 1000).map((q) => ({
           url: `${SITE_URL}/question/${q._id}`,
           lastModified: q.updatedAt ? new Date(q.updatedAt) : new Date(),
           changeFrequency: 'weekly',

@@ -4,7 +4,7 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/admin/", "/test/", "/report-issue/"],
+        disallow: ["/api/", "/admin/", "/test/", "/report-issue/", "/questions?*"],
       },
       {
         userAgent: [
@@ -17,12 +17,12 @@ export default function robots() {
           "facebookexternalhit"
         ],
         allow: ["/", "/llms.txt", "/llms-full.txt", "/.well-known/ai-plugin.json", "/openapi.json"],
-        disallow: ["/api/", "/admin/", "/test/", "/report-issue/"],
+        disallow: ["/api/", "/admin/", "/test/", "/report-issue/", "/questions?*"],
       },
       {
         userAgent: "Googlebot",
         allow: "/",
-        disallow: ["/api/", "/admin/", "/test/"],
+        disallow: ["/api/", "/admin/", "/test/", "/questions?*"],
       },
     ],
     sitemap: "https://question.maarula.in/sitemap.xml",

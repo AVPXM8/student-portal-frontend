@@ -66,6 +66,20 @@ export default function RootLayout({ children }) {
         <Script id="register-sw" strategy="lazyOnload">
           {`
             if ('serviceWorker' in navigator) {
+              // Clean up other service workers registered on this origin (e.g. from previous projects running on the same port)
+              navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for (let registration of registrations) {
+                  const worker = registration.active || registration.waiting || registration.installing;
+                  if (worker && !worker.scriptURL.endsWith('/sw.js')) {
+                    registration.unregister().then(function() {
+                      console.log('Unregistered conflict-causing service worker:', worker.scriptURL);
+                      // Force reload to get clean state
+                      window.location.reload();
+                    });
+                  }
+                }
+              });
+
               window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/sw.js').then(function(reg) {
                   console.log('Service Worker registered successfully with scope: ', reg.scope);

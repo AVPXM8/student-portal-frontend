@@ -3,7 +3,7 @@
    Brand: Orange (#f97316) / Dark Slate (#0f172a)
    ============================================================ */
 
-:root {
+.container {
   --acc: #f97316;
   --acc-dark: #ea580c;
   --acc-soft: #fff7ed;
@@ -28,10 +28,7 @@
   --shadow-md: 0 12px 32px rgba(0,0,0,.08);
   --shadow-lg: 0 24px 64px rgba(0,0,0,.12);
   --transition: .4s cubic-bezier(.22,1,.36,1);
-}
 
-/* ── Page shell ─────────────────────────────────── */
-.container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 60px 20px 100px;

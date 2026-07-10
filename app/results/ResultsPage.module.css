@@ -1,5 +1,5 @@
 /* ========== Theme tokens ========== */
-:root {
+.container {
   --brand-orange: #F97316;         /* primary accent */
   --brand-orange-dark: #EA580C;    /* hover/active */
   --brand-orange-light: #FFEDD5;   /* subtle backgrounds/pills */
@@ -15,10 +15,7 @@
   --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
   --shadow-md: 0 4px 16px rgba(0,0,0,.08);
   --shadow-lg: 0 10px 28px rgba(0,0,0,.12);
-}
 
-/* ========== Container & Header ========== */
-.container { 
   max-width: 1200px; 
   margin: 0 auto; 
   padding: 120px 20px 40px; /* Increased top padding to fix header overlap */
@@ -317,6 +314,6 @@
   .tabButton { padding: 9px 16px; font-size: .98rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  :global(*) { transition: none !important; animation: none !important; }
+  .container * { transition: none !important; animation: none !important; }
 }
 

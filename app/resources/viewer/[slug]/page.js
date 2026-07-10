@@ -43,7 +43,7 @@ export default async function ResourcePage({ params }) {
     notFound();
   }
 
-  const pdfUrl = pdf.isLocal ? `/api/pdf/${slug}` : pdf.url;
+  const pdfUrl = pdf.isLocal ? `/pyqPdf/${encodeURIComponent(pdf.fileName)}` : pdf.url;
 
   return (
     <div className={styles.pageContainer}>

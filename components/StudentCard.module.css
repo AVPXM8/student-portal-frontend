@@ -1,4 +1,4 @@
-:root{
+.studentCard{
   --brand-orange:#F97316;
   --brand-orange-dark:#EA580C;
   --brand-orange-light:#FFEDD5;
@@ -6,9 +6,7 @@
   --ink-600:#475569;
   --line:#e2e8f0;
   --card:#fff;
-}
 
-.studentCard{
   background:var(--card);
   border:1px solid var(--line);
   border-radius:14px;

@@ -60,7 +60,7 @@ const Header = () => {
             /* CLS: Dimensions match CSS (52px height) to prevent layout shift */
             width={52} 
             height={52} 
-            style={{ width: "auto" }}
+            style={{ width: "auto", height: "auto" }}
             priority={true}
             fetchPriority="high"
           />

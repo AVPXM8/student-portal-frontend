@@ -624,7 +624,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :global(*) {
+  .hero *, .section * {
     transition: none !important;
     animation: none !important;
   }

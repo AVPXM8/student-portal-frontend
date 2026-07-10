@@ -33,7 +33,7 @@ const SITE_URL = 'https://question.maarula.in';
 export async function generateStaticParams() {
   try {
     const res = await fetch(
-      `${API_BASE}/api/questions/public?popular=true&limit=100`,
+      `${API_BASE}/api/questions/public?limit=1000`,
       { next: { revalidate: 86400 } },
     );
     if (!res.ok) return [];
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }) {
 
   try {
     const res = await fetch(`${API_BASE}/api/questions/public/${id}`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 86400 },
     });
     const question = await res.json();
 
@@ -209,8 +209,8 @@ export default async function Page({ params, searchParams }) {
 
   try {
     const [qRes, rRes] = await Promise.all([
-      fetch(`${API_BASE}/api/questions/public/${id}`, { next: { revalidate: 3600 } }),
-      fetch(`${API_BASE}/api/questions/public/${id}/related`, { next: { revalidate: 3600 } }),
+      fetch(`${API_BASE}/api/questions/public/${id}`, { next: { revalidate: 86400 } }),
+      fetch(`${API_BASE}/api/questions/public/${id}/related`, { next: { revalidate: 86400 } }),
     ]);
     question = await qRes.json();
     const rData = await rRes.json();

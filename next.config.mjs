@@ -2,13 +2,9 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'res.cloudinary.com' },
-      { protocol: 'https', hostname: 'question.maarula.in' },
-    ],
-    // Serve modern formats automatically
-    formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
   },
+  transpilePackages: ['react-pdf', 'pdfjs-dist'],
   /* PERF: Tree-shake icon libraries — only include used icons in bundle */
   experimental: {
     optimizePackageImports: ['react-icons', 'lucide-react'],

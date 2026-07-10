@@ -42,6 +42,7 @@ const Footer = () => {
           className={styles.footerLogo}
           width={100}
           height={100}
+          style={{ width: "auto", height: "auto" }}
           loading="lazy"
         />
         <h3 className={styles.footerTitle}>MAARULA CLASSES</h3>

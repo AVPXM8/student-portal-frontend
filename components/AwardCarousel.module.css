@@ -1,4 +1,5 @@
 .scrollerContainer{
+  --item-count: 54; /* fallback; real value injected inline */
   width:100%;
   overflow:hidden;
   position: relative;
@@ -59,4 +60,4 @@
 }
 
 /* Keep animation distance in sync with duplicated list */
-:root{ --item-count: 54; } /* fallback; real value injected inline */
+

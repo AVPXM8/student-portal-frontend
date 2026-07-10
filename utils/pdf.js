@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const PDF_DIRECTORY = path.join(process.cwd(), 'data', 'pyqPdf');
+const PDF_DIRECTORY = path.join(process.cwd(), 'public', 'pyqPdf');
 
 /**
  * Generates a URL-friendly slug from a filename
