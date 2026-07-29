@@ -215,6 +215,7 @@ export const summaryBanners = [
     imageUrl: '/images/cuet-pg-2026.jpg'
 
   },
+  /*
   {
     id: 'banner-cuet',
     altText: 'CUET-PG 2025 selected students from Maarula Classes',
@@ -231,6 +232,7 @@ export const summaryBanners = [
     altText: 'AMU, VIT, MAH-CET 2025 selected students from Maarula Classes',
     imageUrl: 'https://res.cloudinary.com/dwmj6up6j/image/upload/v1752548233/AMU_MAH-CET_VIT_tfbdco.jpg'
   }
+  */
 ];
 
 // Placed students (no year constraints). Optional fields (company, role, yearPlaced) can be added later.
