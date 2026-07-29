@@ -212,7 +212,7 @@ export const summaryBanners = [
   {
     id: 'banner-cuet-2026',
     altText: 'CUET-PG 2026 selected students from Maarula Classes',
-    imageUrl: 'https://res.cloudinary.com/dwmj6up6j/image/upload/v1778990899/CUET-RESULT-2026_whwweu.png'
+    imageUrl: '/images/cuet-pg-2026.jpg'
 
   },
   {
