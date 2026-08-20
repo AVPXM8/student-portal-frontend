@@ -37,7 +37,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.footerTop}>
         <Image 
-          src="https://res.cloudinary.com/dwmj6up6j/image/upload/f_auto,q_auto,w_100/v1752683439/maarulalogo_lywhdo.png" 
+          src="/maarulalogo.png" 
           alt="Maarula Classes Logo" 
           className={styles.footerLogo}
           width={100}

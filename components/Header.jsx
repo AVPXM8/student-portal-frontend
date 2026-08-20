@@ -54,7 +54,7 @@ const Header = () => {
         <Link href="/" className={styles.logoContainer}>
           <Image 
             /* PERF: Serve via Cloudinary for auto-format — local maarulalogo.png is 237KB for 52px display */
-            src="https://res.cloudinary.com/dwmj6up6j/image/upload/f_auto,q_auto,w_80/v1752683439/maarulalogo_lywhdo.png"
+            src="/maarulalogo.png"
             alt="Mathem Solvex Logo" 
             className={styles.logo} 
             /* CLS: Dimensions match CSS (52px height) to prevent layout shift */

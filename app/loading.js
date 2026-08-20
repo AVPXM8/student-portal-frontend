@@ -10,7 +10,7 @@ export default function Loading() {
         <div className={styles.pulsingCircleDelayed} />
         <div className={styles.loaderLogo}>
           <Image 
-            src="https://res.cloudinary.com/dwmj6up6j/image/upload/f_auto,q_auto,w_80/v1752683439/maarulalogo_lywhdo.png" 
+            src="/maarulalogo.png" 
             alt="Loading Mathem Solvex..." 
             width={80} 
             height={80}
